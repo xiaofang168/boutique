@@ -1,4 +1,4 @@
-package monad.extension.bilu.model
+package com.boutique.entities
 
 import javax.persistence.Table
 import javax.persistence.Id
