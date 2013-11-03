@@ -7,6 +7,9 @@ import javax.persistence.GenerationType
 import javax.persistence.Column
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
+import javax.persistence.Entity
+@Entity
+@Table(name = "user")
 @Table(name = "user")
 class User {
   @Id
