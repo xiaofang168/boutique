@@ -1,15 +1,14 @@
 package com.boutique.entities
 
-import javax.persistence.Table
-import javax.persistence.Id
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
 import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
+import javax.persistence.Table
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
-import javax.persistence.Entity
+import javax.persistence.GenerationType
 @Entity
-@Table(name = "user")
 @Table(name = "user")
 class User {
   @Id
