@@ -9,8 +9,15 @@ import org.apache.tapestry5.ioc.MethodAdviceReceiver
 import org.apache.tapestry5.ioc.annotations.Match
 import org.apache.tapestry5.ioc.annotations.SubModule
 import org.apache.tapestry5.hibernate.HibernateCoreModule
+import com.boutique.dao.CrudDAO
+import com.boutique.dao.impl.CrudDAOImpl
+import org.apache.tapestry5.ioc.ServiceBinder
 @SubModule( Array(classOf[HibernateCoreModule]) )
-class AppModule {
+object AppModule {
+  
+	def bind(binder: ServiceBinder ){
+		binder.bind(classOf[CrudDAO], classOf[CrudDAOImpl]);
+    }
   
 	def contributeClasspathAssetAliasManager(configuration:MappedConfiguration[String,String]){
         configuration.add("assets", "assets");
