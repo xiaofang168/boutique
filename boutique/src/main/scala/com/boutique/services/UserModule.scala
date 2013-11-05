@@ -22,6 +22,6 @@ import org.apache.tapestry5.ioc.ServiceBinder
 object UserModule {
   
 	def bind(binder: ServiceBinder ){
-        binder.bind(classOf[UserService], classOf[UserService]);
+        binder.bind(classOf[UserService])
     }
 }
