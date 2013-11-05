@@ -9,11 +9,16 @@
  */
 package com.boutique
 
+import org.apache.tapestry5.ioc.IOCUtilities
+import org.junit.Assert
+import org.junit.Before
 import org.junit.Test
+
 import com.boutique.entities.User
 import com.boutique.services.user.UserService
-import org.apache.tapestry5.ioc.annotations.Inject
-import org.junit.Assert
+
+import javax.persistence.Entity
+import javax.persistence.Table
 
 /**
  * @ClassName: DbTest
@@ -24,10 +29,15 @@ import org.junit.Assert
  */
 
 class DbTest {
-
-	@Inject
-	var userService:UserService = _
   
+	var userService: UserService = _
+  
+	@Before
+	def start(){
+	  IOCUtilities.buildDefaultRegistry()
+	  userService = new UserService()
+	}
+	
 	@Test
 	def saveUser(){
 	  var user = new User()
@@ -37,6 +47,7 @@ class DbTest {
 	
 	@Test
 	def getUser(){
+	  userService = new UserService()
 	  Assert.assertNotNull(userService)
 	}
 }
