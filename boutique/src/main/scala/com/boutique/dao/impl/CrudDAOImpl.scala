@@ -21,7 +21,7 @@ import com.boutique.entities.User
  * @date: 2013-11-4 下午6:49:26
  * @version: V1.0
  */
-class  CrudDAOImpl extends CrudDAO {
+class CrudDAOImpl extends CrudDAO {
   
 	@Inject
 	var session: Session = _
