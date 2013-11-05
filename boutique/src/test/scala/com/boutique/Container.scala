@@ -14,6 +14,7 @@ import org.apache.tapestry5.ioc.Registry
 import org.apache.tapestry5.ioc.RegistryBuilder
 import com.boutique.services.AppModule
 import scala.collection.Seq
+import com.boutique.services.user.UserService
 
 /**
  * @ClassName: Container
@@ -24,21 +25,8 @@ import scala.collection.Seq
  */
 class Container private () {
 	var registry: Registry = _
+	Container.initRegistry()
 	
-	def this(moduleClasses: Class[_]*) {
-	  this
-	  this.initRegistry(moduleClasses: _*)
-	}
-	
-	private def initRegistry(moduleClasses: Class[_]*) {
-	    var builder = new RegistryBuilder()
-	    var classes = Seq(moduleClasses):+Seq(AppModule.getClass())
-	    System.setProperty("tapestry.modules", classes.map(_.getClass().getName())mkString(","));
-	    //build registry instance
-	    registry = builder.build()
-	    registry.performRegistryStartup()
-	}
-
 	/**
 	 * get service instance
 	 * @param class service interface class
@@ -64,34 +52,34 @@ class Container private () {
 object Container {
 	private var container: Container = _
 	private var registry: Registry = _
-	private def lock: ReentrantLock = new ReentrantLock()
 	
+	def apply(moduleClasses: Class[_]*):Container = new Container(){
+	  initRegistry(moduleClasses: _*)
+	}
+	
+	private def initRegistry(moduleClasses: Class[_]*) {
+	    var builder = new RegistryBuilder()
+	    //var classes = Seq(moduleClasses):+Seq(AppModule.getClass())
+	    //System.setProperty("tapestry.modules", classes.map(_.getClass().getName())mkString(","));
+	    //build registry instance
+	    builder.add(classOf[AppModule])
+	    builder.add(moduleClasses: _*)
+	    registry = builder.build()
+	    registry.performRegistryStartup()
+	}
+
 	def getInstance: Container = {
 			if (container == null) {
-				try {
-					lock.lock()
-					if (container == null) {
-						//container = new Container()
-					}
-				} finally {
-					lock.unlock()
-				}
-	}
-    return container
+				container = new Container()
+			}
+			return container
 	}
 
 	def getInstance(moduleClasses: Class[_]*): Container = {
-			if (container == null) {
-				try {
-					lock.lock();
-					if (container == null) {
-						container = new Container(moduleClasses: _*)
-					}
-				} finally {
-					lock.unlock();
-				}
-			}
-			return container;
+		if (container == null) {
+			container = Container(moduleClasses: _*)
+		}
+		return container;
 	}
 
 	def shutdown() {

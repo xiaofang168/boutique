@@ -32,10 +32,11 @@ class DbTest {
   
 	var userService: UserService = _
   
+	var container: Container = _
+	
 	@Before
 	def start(){
-	  IOCUtilities.buildDefaultRegistry()
-	  userService = new UserService()
+		container = Container.getInstance()
 	}
 	
 	@Test
@@ -47,7 +48,6 @@ class DbTest {
 	
 	@Test
 	def getUser(){
-	  userService = new UserService()
-	  Assert.assertNotNull(userService)
+	  Assert.assertNotNull(container)
 	}
 }
