@@ -13,10 +13,6 @@ import com.boutique.dao.CrudDAO
 import com.boutique.dao.impl.CrudDAOImpl
 import org.apache.tapestry5.ioc.ServiceBinder
 
-class AppModule{
-  
-}
-
 @SubModule( Array(classOf[HibernateCoreModule]) )
 object AppModule {
   
