@@ -15,6 +15,7 @@ import org.apache.tapestry5.ioc.RegistryBuilder
 import com.boutique.services.AppModule
 import scala.collection.Seq
 import com.boutique.services.user.UserService
+import org.apache.tapestry5.hibernate.HibernateCoreModule
 
 /**
  * @ClassName: Container
@@ -62,7 +63,9 @@ object Container {
 	    //var classes = Seq(moduleClasses):+Seq(AppModule.getClass())
 	    //System.setProperty("tapestry.modules", classes.map(_.getClass().getName())mkString(","));
 	    //build registry instance
-	    builder.add(classOf[AppModule])
+	    //builder.add(classOf[])
+	    builder.add(classOf[HibernateCoreModule])
+	    builder.add(classOf[AppModuleTest])
 	    builder.add(moduleClasses: _*)
 	    registry = builder.build()
 	    registry.performRegistryStartup()
