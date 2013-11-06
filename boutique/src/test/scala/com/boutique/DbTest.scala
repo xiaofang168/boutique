@@ -13,12 +13,11 @@ import org.apache.tapestry5.ioc.IOCUtilities
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-
 import com.boutique.entities.User
 import com.boutique.services.user.UserService
-
 import javax.persistence.Entity
 import javax.persistence.Table
+import com.boutique.services.AppModule
 
 /**
  * @ClassName: DbTest
