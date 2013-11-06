@@ -23,9 +23,9 @@ import com.boutique.services.user.UserService
  * @date: 2013-11-5 上午9:43:24
  * @version: V1.0
  */
-class Container private () {
+class Container private {
+  
 	var registry: Registry = _
-	Container.initRegistry()
 	
 	/**
 	 * get service instance
@@ -66,13 +66,6 @@ object Container {
 	    builder.add(moduleClasses: _*)
 	    registry = builder.build()
 	    registry.performRegistryStartup()
-	}
-
-	def getInstance: Container = {
-			if (container == null) {
-				container = new Container()
-			}
-			return container
 	}
 
 	def getInstance(moduleClasses: Class[_]*): Container = {
