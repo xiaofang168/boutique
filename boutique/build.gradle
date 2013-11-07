@@ -1,6 +1,8 @@
 apply plugin: 'scala' 
 apply plugin: 'eclipse' 
- 
+buildDir = "target"
+version = '1.0'
+
 task createScalaProject << { 
 	sourceSets*.scala.srcDirs*.each { it.mkdirs() } 
 	sourceSets*.resources.srcDirs*.each { it.mkdirs()} 
@@ -16,6 +18,7 @@ repositories {
 
 dependencies {
 	compile (
+		'org.scala-lang:scala-library:2.10.2',
 		'org.apache.tapestry:tapestry-core:5.3.7',
 		'org.apache.tapestry:tapestry-hibernate:5.3.7',
 		'org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final',
