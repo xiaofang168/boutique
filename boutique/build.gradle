@@ -3,6 +3,17 @@ apply plugin: 'eclipse'
 buildDir = "target"
 version = '1.0'
 
+sourceSets {
+   main {
+        scala {
+            srcDirs = ['src/main/scala']
+        }
+        resources {
+            srcDirs = ['src/main/resources','src/main/development']
+        }
+    }
+}
+
 task createScalaProject << { 
 	sourceSets*.scala.srcDirs*.each { it.mkdirs() } 
 	sourceSets*.resources.srcDirs*.each { it.mkdirs()} 
@@ -32,4 +43,18 @@ dependencies {
 	)
 	testCompile group: 'junit', name: 'junit', version: '4.+'
 }
+
+// changing the output directories of the generated classpathentries
+import org.gradle.plugins.ide.eclipse.model.SourceFolder 
+eclipse.classpath.file {
+    beforeMerged { classpath -> 
+        classpath.entries.clear()
+    }
+    whenMerged {  cp -> 
+        cp.entries.findAll { it instanceof SourceFolder && it.path.startsWith("src/main/") }*.output = "target/classes" 
+        cp.entries.findAll { it instanceof SourceFolder && it.path.startsWith("src/test/") }*.output = "target/test-classes" 
+        //cp.entries.removeAll { it.kind == "output" }
+    }
+}
+
 
