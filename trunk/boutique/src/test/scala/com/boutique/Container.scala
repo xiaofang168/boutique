@@ -9,7 +9,6 @@
  */
 package com.boutique
 
-import scala.actors.threadpool.locks.ReentrantLock
 import org.apache.tapestry5.ioc.Registry
 import org.apache.tapestry5.ioc.RegistryBuilder
 import com.boutique.services.AppModule
