@@ -13,7 +13,10 @@ import com.boutique.dao.CrudDAO
 import org.hibernate.Session
 import org.apache.tapestry5.ioc.annotations.Inject
 import com.boutique.entities.User
-
+import com.boutique.AppConstant
+import scala.collection.JavaConverters._
+import scala.collection.mutable.Buffer
+import scala.collection.convert.Decorators
 /**
  * @ClassName: CrudDAO
  * @Description: 增删改查dao服务实现类
@@ -33,8 +36,17 @@ class CrudDAOImpl extends CrudDAO {
 			return t;
 	}
 	
-	def find[T, PK  <: Serializable](clType: Class[T], id: PK ):T = {
+	def get[T, PK  <: java.io.Serializable](clType: Class[T], id: PK ):T = {
 	   session.get(clType, id).asInstanceOf
 	}
 	
+	def find[T](hql:String):List[T] = {
+	  var query = session.createQuery(hql)
+	  query.setCacheable(AppConstant.EHCACH_EABLE)
+	  var list:java.util.List[T] = query.list().asInstanceOf[java.util.List[T]]
+	  return  scala.collection.JavaConversions.asScalaBuffer(list).toList
+	}
+
 }
+	
+	
