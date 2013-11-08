@@ -13,7 +13,7 @@ import com.boutique.dao.CrudDAO
 import com.boutique.dao.impl.CrudDAOImpl
 import org.apache.tapestry5.ioc.ServiceBinder
 
-@SubModule( Array(classOf[HibernateCoreModule]) )
+@SubModule( Array(classOf[HibernateCoreModule],classOf[UserModule]) )
 object AppModule {
   
 	def bind(binder: ServiceBinder ){
