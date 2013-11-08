@@ -19,6 +19,8 @@ import org.apache.tapestry5.hibernate.HibernateSymbols
 import org.apache.tapestry5.SymbolConstants
 import org.apache.tapestry5.ioc.Configuration
 import org.apache.tapestry5.ioc.annotations.Match
+import org.apache.tapestry5.ioc.annotations.SubModule
+import com.boutique.services.UserModule
 
 /**
  * @ClassName: AppModuleTest
@@ -27,7 +29,9 @@ import org.apache.tapestry5.ioc.annotations.Match
  * @date: 2013-11-6 上午10:15:18
  * @version: V1.0
  */
+@SubModule(Array(classOf[UserModule]))
 class AppModuleTest{}
+
 object AppModuleTest {
   
 	def bind(binder: ServiceBinder ){
