@@ -9,6 +9,7 @@
  */
 package com.boutique.dao
 
+
 /**
  * @ClassName: CrudDAO
  * @Description: 增删改查dao服务接口
@@ -20,6 +21,8 @@ trait CrudDAO {
 
 	def save[T](t: T):T
 	
-	def find[T, PK  <: Serializable](clType: Class[T], id: PK ):T
+	def get[T, PK  <: java.io.Serializable](clType: Class[T], id: PK ):T
   
+	def find[T](hql:String):List[T]
+	
 }
