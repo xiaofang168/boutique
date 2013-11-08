@@ -9,7 +9,7 @@ sourceSets {
             srcDirs = ['src/main/scala']
         }
         resources {
-            srcDirs = ['src/main/resources','src/main/development']
+            srcDirs = ['src/main/resources','src/main/conf/development']
         }
     }
 }
