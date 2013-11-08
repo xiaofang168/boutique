@@ -15,6 +15,7 @@ import com.boutique.services.AppModule
 import scala.collection.Seq
 import com.boutique.services.user.UserService
 import org.apache.tapestry5.hibernate.HibernateCoreModule
+import org.apache.tapestry5.ioc.services.TapestryIOCModule
 
 /**
  * @ClassName: Container
@@ -25,15 +26,13 @@ import org.apache.tapestry5.hibernate.HibernateCoreModule
  */
 class Container private {
   
-	var registry: Registry = _
-	
 	/**
 	 * get service instance
 	 * @param class service interface class
 	 * @since 0.1
 	 */
 	def getService[T](serviceInterface: Class[T]): T = {
-			return registry.getService(serviceInterface)
+			return Container.registry.getService(serviceInterface)
 	}
 
 	/**
@@ -44,12 +43,13 @@ class Container private {
 	* @since 0.1
 	*/
 	def getService[T](serviceInterface: Class[T], serviceId: String): T = {
-			return registry.getService(serviceId, serviceInterface);
+			return Container.registry.getService(serviceId, serviceInterface);
 	}
 
 }
 
 object Container {
+  
 	private var container: Container = _
 	private var registry: Registry = _
 	
@@ -78,8 +78,8 @@ object Container {
 	}
 
 	def shutdown() {
-		if (container != null && container.registry != null) {
-			container.registry.shutdown()
+		if (container != null && registry != null) {
+			registry.shutdown()
 		}
 	}
 
