@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 import javax.persistence.GenerationType
 @Entity
+@org.hibernate.annotations.Entity(dynamicUpdate=true,dynamicInsert=true)
 @Table(name = "user")
 class User {
   @Id
