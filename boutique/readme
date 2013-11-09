@@ -1,0 +1,2 @@
+# use the -x command line argument which excludes any task.
+gradle build -x test
