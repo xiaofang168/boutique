@@ -20,11 +20,11 @@ task createScalaProject << {
 }
 
 repositories {
+	mavenCentral()
 	maven {
 			url "http://localhost:8081/nexus/content/groups/public/"
 			url "http://mirrors.ibiblio.org/maven2/"
 	}
-	//mavenCentral()
 }
 
 dependencies {
