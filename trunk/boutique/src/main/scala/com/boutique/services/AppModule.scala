@@ -19,14 +19,9 @@ object AppModule {
 	def bind(binder: ServiceBinder ){
 		binder.bind(classOf[CrudDAO], classOf[CrudDAOImpl]);
     }
-  
-	def contributeClasspathAssetAliasManager(configuration:MappedConfiguration[String,String]){
-        configuration.add("assets", "assets");
-    }
 	
 	//contribute factory defaults
     def contributeApplicationDefaults(configuration: MappedConfiguration[String, String]) {
-        configuration.add(SymbolConstants.DEFAULT_STYLESHEET, "classpath:assets/css/style.css");
         configuration.add(HibernateSymbols.EARLY_START_UP, "true");
     }
 
