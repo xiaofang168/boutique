@@ -32,6 +32,7 @@ class CrudDAOImplTest{
 	def testSave() {
 		var user = new User
 		user.username = "fangjie"
+		user.password = "1234"
 		crudDao.save(user)
 		Assert.assertNotNull(user.id)
 	}
@@ -47,6 +48,13 @@ class CrudDAOImplTest{
 	def testFind(){
 	  testSave
 	  var list = crudDao.find("from User")
+	  Assert.assertEquals(1, list.size)
+	}
+	
+	@Test
+	def getFindHqlParams(){
+	  testSave
+	  var list = crudDao.find("from User u where u.username = ? and u.password = ?",Array("fangjie","1234"))
 	  Assert.assertEquals(1, list.size)
 	}
 
