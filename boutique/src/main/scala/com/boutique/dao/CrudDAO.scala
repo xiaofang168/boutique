@@ -25,4 +25,6 @@ trait CrudDAO {
   
 	def find[T](hql:String):List[T]
 	
+	def find(hql: String, params: Array[Object]):List[_]
+	
 }
