@@ -15,7 +15,7 @@ trait UserService {
    * @param user
    * @return persisted User
    */
-  def saved(user: User): User
+  def save(user: User): User
   
    /**
    * @param username 用户名
