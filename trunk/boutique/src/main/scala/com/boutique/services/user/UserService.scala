@@ -1,20 +1,6 @@
-/**
- * Copyright © 2013 杭州海康威视数字技术股份有限公司  All rights reserved.
- * @Title: UserService.scala
- * @Prject: boutique
- * @Package: com.boutique.services
- * @author: 方杰  mailto:fangjie1@hikvision.com.cn
- * @date: 2013-11-4 下午7:20:42
- * @version: V1.0
- */
 package com.boutique.services.user
 
 import com.boutique.entities.User
-import org.apache.tapestry5.hibernate.annotations.CommitAfter
-import com.boutique.dao.CrudDAO
-import javax.persistence.Entity
-import javax.persistence.Table
-import org.apache.tapestry5.ioc.annotations.Inject
 
 /**
  * @ClassName: UserService
@@ -23,14 +9,18 @@ import org.apache.tapestry5.ioc.annotations.Inject
  * @date: 2013-11-4 下午7:20:42
  * @version: V1.0
  */
-class UserService {
+trait UserService {
 
-  @Inject
-  var crudDao:CrudDAO = _
+  /**
+   * @param user
+   * @return persisted User
+   */
+  def saved(user: User): User
   
-  @CommitAfter
-  def saved(user:User):User ={
-    return crudDao.save(user)
-  }
-  
+   /**
+   * @param username 用户名
+   * @return password 密码
+   * return ture/false Boolean
+   */
+  def login(username:String, password:String):Boolean
 }
