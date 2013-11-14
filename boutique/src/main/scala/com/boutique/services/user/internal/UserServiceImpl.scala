@@ -18,7 +18,7 @@ class UserServiceImpl extends UserService {
   @Inject
   var crudDao: CrudDAO = _
 
-  def saved(user: User): User = {
+  def save(user: User): User = {
     return crudDao.save(user)
   }
 
