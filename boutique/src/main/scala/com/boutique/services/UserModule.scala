@@ -11,6 +11,7 @@ package com.boutique.services
 
 import com.boutique.services.user.UserService
 import org.apache.tapestry5.ioc.ServiceBinder
+import com.boutique.services.user.internal.UserServiceImpl
 
 /**
  * @ClassName: UserModule
@@ -23,6 +24,6 @@ class UserModule{}
 object UserModule {
   
 	def bind(binder: ServiceBinder ){
-        binder.bind(classOf[UserService])
+        binder.bind(classOf[UserService], classOf[UserServiceImpl])
     }
 }
