@@ -12,25 +12,28 @@ import org.apache.tapestry5.hibernate.HibernateCoreModule
 import com.boutique.dao.CrudDAO
 import com.boutique.dao.impl.CrudDAOImpl
 import org.apache.tapestry5.ioc.ServiceBinder
+import org.apache.tapestry5.hibernate.HibernateTransactionDecorator
 
-@SubModule( Array(classOf[HibernateCoreModule],classOf[UserModule]) )
+@SubModule(Array(classOf[HibernateCoreModule], classOf[UserModule]))
 object AppModule {
+
+  def bind(binder: ServiceBinder) {
+    binder.bind(classOf[CrudDAO], classOf[CrudDAOImpl]);
+  }
+
+  //contribute factory defaults
+  def contributeApplicationDefaults(configuration: MappedConfiguration[String, String]) {
+    configuration.add(HibernateSymbols.EARLY_START_UP, "true");
+  }
+
+  def contributeHibernateEntityPackageManager(configuration: Configuration[String]) {
+    configuration.add("com.boutique.entities");
+  }
+
   
-	def bind(binder: ServiceBinder ){
-		binder.bind(classOf[CrudDAO], classOf[CrudDAOImpl]);
-    }
-	
-	//contribute factory defaults
-    def contributeApplicationDefaults(configuration: MappedConfiguration[String, String]) {
-        configuration.add(HibernateSymbols.EARLY_START_UP, "true");
-    }
-
-	def contributeHibernateEntityPackageManager(configuration: Configuration[String] ) {
-		configuration.add("com.boutique.entities");
-	}
-
-	@Match(Array[String]("*Service"))
-	def adviseTransactions(advisor:HibernateTransactionAdvisor,receiver:MethodAdviceReceiver ) {
-		advisor.addTransactionCommitAdvice(receiver);
-	}
+  @Match(Array[String]("*Service"))
+  def decorateTransactions[T](serviceInterface: Class[T], delegate: T, serviceId: String, decorator: HibernateTransactionDecorator): T = {
+    return decorator.build(serviceInterface, delegate, serviceId)
+  }
+  
 }
