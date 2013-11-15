@@ -1,6 +1,7 @@
 package com.boutique.services.user
 
 import com.boutique.entities.User
+import org.apache.tapestry5.hibernate.annotations.CommitAfter
 
 /**
  * @ClassName: UserService
@@ -15,6 +16,7 @@ trait UserService {
    * @param user
    * @return persisted User
    */
+  @CommitAfter
   def save(user: User): User
   
    /**
