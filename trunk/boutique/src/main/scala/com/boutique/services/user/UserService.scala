@@ -22,7 +22,7 @@ trait UserService {
    /**
    * @param username 用户名
    * @return password 密码
-   * return ture/false Boolean
+   * return obj User 对象
    */
-  def login(username:String, password:String):Boolean
+  def login(username:String, password:String):User
 }
