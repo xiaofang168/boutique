@@ -41,8 +41,8 @@ class UserServiceTest {
 
 	@Test
 	def testLogin() {
-		var result = userService.login("fangjie", "1234")
-		Assert.assertTrue(result)
+		var user = userService.login("fangjie", "12345")
+		Assert.assertEquals(null, user)
 	}
 
 }
