@@ -23,8 +23,10 @@ trait CrudDAO {
 	
 	def get[T, PK  <: java.io.Serializable](clType: Class[T], id: PK ):T
   
-	def find[T](hql:String):List[T]
+	def find(hql:String):List[_]
 	
 	def find(hql: String, params: Array[Object]):List[_]
+	
+	def findUnique[T](hql: String, params: Array[Object]): T
 	
 }

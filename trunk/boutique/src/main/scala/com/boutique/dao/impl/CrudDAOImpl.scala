@@ -41,14 +41,22 @@ class CrudDAOImpl extends CrudDAO {
     session.get(clType, id).asInstanceOf
   }
 
-  def find[T](hql: String): List[T] = {
-    var query = session.createQuery(hql)
-    query.setCacheable(AppConstant.EHCACH_EABLE)
-    var list: java.util.List[T] = query.list().asInstanceOf[java.util.List[T]]
-    return scala.collection.JavaConversions.asScalaBuffer(list).toList
+  def find(hql: String): List[_] = {
+    return find(hql, null)
   }
 
   def find(hql: String, params: Array[Object]): List[_] = {
+    var query = setHqlQueryParameter(hql, params)
+    query.setCacheable(AppConstant.EHCACH_EABLE);
+    scala.collection.JavaConversions.asScalaBuffer(query.list()).toList
+  }
+
+  def findUnique[T](hql: String, params: Array[Object]): T = {
+    var query = setHqlQueryParameter(hql, params)
+    return query.uniqueResult().asInstanceOf[T]
+  }
+
+  private def setHqlQueryParameter(hql: String, params: Array[Object]): Query = {
     var query: Query = session.createQuery(hql)
     if (params != null) {
       for (i <- 0 until params.length) {
@@ -65,8 +73,7 @@ class CrudDAOImpl extends CrudDAO {
         }
       }
     }
-    query.setCacheable(AppConstant.EHCACH_EABLE);
-    scala.collection.JavaConversions.asScalaBuffer(query.list()).toList
+    return query
   }
 }
 	
