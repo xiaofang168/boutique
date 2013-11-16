@@ -34,7 +34,7 @@ class UserServiceTest {
 	def testSave() {
 		var user = new User
 		user.username = "fangjie"
-		user.password = "1234"
+		user.password = "123456"
 		userService.save(user)
 		Assert.assertNotNull(user.id)
 	}
