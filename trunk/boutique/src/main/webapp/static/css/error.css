@@ -1,0 +1,4 @@
+.required-field  { border-right-color: orange; }
+.error-label  { color: red; }
+.error-field  { border-color: red; }
+.error-msg  { color: red; }
