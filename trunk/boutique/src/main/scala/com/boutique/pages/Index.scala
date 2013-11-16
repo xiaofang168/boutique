@@ -23,7 +23,7 @@ class Index {
     var session = request.getSession(false)
     if (session != null) {
       if (session.getAttribute(AppConstant.USER_INFO) != null){
-    	  user = session.getAttribute(AppConstant.USER_INFO).asInstanceOf
+    	  user = session.getAttribute(AppConstant.USER_INFO).asInstanceOf[User]
       }
     }
   }
