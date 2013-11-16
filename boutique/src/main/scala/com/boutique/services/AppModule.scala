@@ -12,7 +12,7 @@ import com.boutique.dao.CrudDAO
 import com.boutique.dao.impl.CrudDAOImpl
 import org.apache.tapestry5.hibernate.HibernateCoreModule
 
-@SubModule(Array(classOf[HibernateCoreModule], classOf[UserModule]))
+@SubModule(Array(classOf[HibernateCoreModule], classOf[UserModule], classOf[WebModule]))
 object AppModule {
 
   def bind(binder: ServiceBinder) {
@@ -21,9 +21,11 @@ object AppModule {
 
   //contribute factory defaults
   def contributeApplicationDefaults(configuration: MappedConfiguration[String, String]) {
-    configuration.add(HibernateSymbols.EARLY_START_UP, "true");
-    configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en");
-    configuration.add(SymbolConstants.APPLICATION_VERSION, "1.0-SNAPSHOT");
+    configuration.add(HibernateSymbols.EARLY_START_UP, "true")
+    configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en")
+    configuration.add(SymbolConstants.PRODUCTION_MODE, "false")
+    configuration.add(SymbolConstants.HMAC_PASSPHRASE, "MD5")
+    configuration.add(SymbolConstants.APPLICATION_VERSION, "1.0-SNAPSHOT")
   }
 
   def contributeHibernateEntityPackageManager(configuration: Configuration[String]) {
