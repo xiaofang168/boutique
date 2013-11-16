@@ -12,10 +12,16 @@
     <link href="${context:static/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
     <link href="${context:static/css/bootstrap-theme.min.css}" rel="stylesheet" type="text/css"/>
   	<link href="${context:static/css/sticky-footer.css}" rel="stylesheet" type="text/css"/>
+  	<link href="${context:static/css/error.css}" rel="stylesheet" type="text/css"/>
   	<script type="text/javascript" src="${context:static/js/jquery.min.js}"></script>
-	<script type="text/javascript" src="${context:static/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" src="${context:static/js/bootstrap.js}"></script>
   	<script type="text/javascript">
   		jQuery.noConflict();
+  		jQuery(document).ready(function($) {
+  		<t:if test="!user">
+    		$($("#login_href").attr('data-target')).modal('toggle', $("#login_href"))
+  		</t:if>
+  		});
   	</script>
   </head>
 <body>
@@ -50,7 +56,7 @@
 			</form>
 			<t:if test="!user">
             	<ul class="nav navbar-nav navbar-right">
-				<li><a data-toggle="modal" href="#login" data-target="#login">Login</a></li>
+				<li><a data-toggle="modal" href="#login" id="login_href" data-target="#login">Login</a></li>
 				<li><a data-toggle="modal" href="#register" data-target="#register">Register</a></li>
 			</ul>	
         	</t:if>
