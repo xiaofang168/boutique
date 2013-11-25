@@ -11,6 +11,7 @@ package com.boutique.services
 import org.apache.tapestry5.ioc.annotations.Contribute
 import org.apache.tapestry5.ioc.MappedConfiguration
 import org.apache.tapestry5.validator.ValidatorMacro
+import org.apache.tapestry5.ioc.Configuration
 
 /**
  * @ClassName: WebModule
@@ -19,13 +20,17 @@ import org.apache.tapestry5.validator.ValidatorMacro
  * @date: 下午4:39:42
  * @version: V1.0
  */
-class WebModule{}
+class WebModule {}
 object WebModule {
-	
+
   @Contribute(classOf[ValidatorMacro])
   def combineValidators(configuration: MappedConfiguration[String, String]) {
     configuration.add("username", "required, minlength=3, maxlength=15")
     configuration.add("password", "required, minlength=6, maxlength=12")
+  }
+
+  def contributeIgnoredPathsFilter(configuration: Configuration[String]) {
+    configuration.add("/dwr/.*")
   }
 
 }
