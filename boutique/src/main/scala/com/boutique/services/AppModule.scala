@@ -21,6 +21,7 @@ object AppModule {
 
   //contribute factory defaults
   def contributeApplicationDefaults(configuration: MappedConfiguration[String, String]) {
+    configuration.add(SymbolConstants.DEFAULT_STYLESHEET, "context:static/css/default.css")
     configuration.add(HibernateSymbols.EARLY_START_UP, "true")
     configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en")
     configuration.add(SymbolConstants.PRODUCTION_MODE, "false")
