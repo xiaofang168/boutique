@@ -27,7 +27,6 @@ class Signin {
   @Inject
   private var userService: UserService = _
 
-  
   @Inject
   private var request: Request = _
   
