@@ -2,13 +2,14 @@
 package com.boutique.components
 
 import org.apache.tapestry5.annotations.Import
+import org.apache.tapestry5.annotations.Parameter
 import org.apache.tapestry5.annotations.Property
 import org.apache.tapestry5.ioc.annotations.Inject
-import org.apache.tapestry5.ComponentResources
-import com.boutique.services.user.internal.Authenticator
 import com.boutique.entities.User
-import org.apache.tapestry5.annotations.Log
-import com.boutique.pages.Index
+import com.boutique.services.user.internal.Authenticator
+import javax.persistence.Entity
+import javax.persistence.Table
+import org.apache.tapestry5.BindingConstants
 
 /**
  * @ClassName: Layout
@@ -18,31 +19,20 @@ import com.boutique.pages.Index
  * @version: V1.0
  */
 @Import(library = Array(
-  "context:/static/js/bootstrap.min.js",
   "context:/static/js/jquery.min.js",
+  "context:/static/js/bootstrap.min.js",
   "context:/static/js/CustomError.js"))
 class Layout {
-
+  
   @Property
-  private var pageName: String = _
-
-  @Inject
-  private var resources: ComponentResources = _
+  @Parameter(required = true, defaultPrefix = BindingConstants.LITERAL)
+  private var pageTitle: String = _
 
   @Inject
   private var authenticator: Authenticator = _
-
-  def getClassForPageName(): String = {
-    if (resources.getPageName().equalsIgnoreCase(pageName)) "current_page_item" else null
-  }
-
+  
   def getUser(): User = {
     if (authenticator.isLoggedIn()) authenticator.getLoggedUser() else null
   }
-
-  @Log
-  def onActionFromLogout(): Object = {
-    authenticator.logout()
-    return classOf[Index]
-  }
+  
 }
