@@ -6,6 +6,8 @@ import org.apache.tapestry5.ioc.annotations.Inject
 import org.apache.tapestry5.services.Session
 import com.boutique.AppConstant
 import com.boutique.entities.User
+import com.boutique.commons.AuthenticationException
+import com.boutique.dao.CrudDAO
 
 /**
  * @ClassName: Authenticator
@@ -15,6 +17,9 @@ import com.boutique.entities.User
  * @version: V1.0
  */
 class Authenticator {
+
+  @Inject
+  private var crudao: CrudDAO = _
 
   @Inject
   private var request: Request = _
@@ -31,6 +36,15 @@ class Authenticator {
       session.setAttribute(AppConstant.USER_INFO, null)
       session.invalidate()
     }
+  }
+
+  @throws(classOf[AuthenticationException])
+  def login(username: String, password: String) {
+    var user = crudao.findUnique("from User u where u.username=? and u.password=?", Array(username, password))
+    if (user == null) {
+      throw new AuthenticationException("The user doesn't exist")
+    }
+    request.getSession(true).setAttribute(AppConstant.USER_INFO, user)
   }
 
   def getLoggedUser(): User = {
