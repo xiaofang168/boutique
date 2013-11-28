@@ -1,0 +1,38 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd" xmlns:p="tapestry:parameter">
+<form class="form-horizontal" role="form"  t:type="CustomForm"  t:id="registerForm">
+	<t:errors />
+	<div class="form-group">
+		<label for="username_0" class="col-lg-4 control-label">Username</label>
+		<div class="col-lg-6">
+			<input class="form-control"  t:id="username" t:type="textfield"  placeholder="Username"/>
+			<t:CustomError for="username"/>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="email" class="col-lg-4 control-label">Email</label>
+		<div class="col-lg-6">
+			<input class="form-control"  t:id="email" t:type="textfield"  placeholder="Email"/>
+			<t:CustomError for="email"/>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="password_0" class="col-lg-4 control-label">Password</label>
+		<div class="col-lg-6">
+			<input class="form-control" t:id="password" t:type="passwordfield" placeholder="Password" />
+			<t:CustomError for="password"/>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="confirmPassword" class="col-lg-4 control-label">Confirm Password</label>
+		<div class="col-lg-6">
+			<input class="form-control" t:type="passwordField" t:id="confirmPassword" placeholder="Confirm Password" />
+			<t:CustomError for="confirmPassword"/>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-lg-offset-4 col-lg-10">
+			<button type="submit" class="btn btn-primary">Create Account</button>
+		</div>
+	</div>
+</form>
+</t:container>
