@@ -2,14 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd" xmlns:p="tapestry:parameter">
 <head>
 	<title>boutique - ${pageTitle}</title>
-	<script type="text/javascript">
-  		jQuery.noConflict();
-  		jQuery(document).ready(function($) {
-	  		<t:if test="!user">
-	    		$($("#login_href").attr('data-target')).modal('toggle', $("#login_href"))
-	  		</t:if>
-  		});
-  	</script>
 </head>
 <body>
 <div id="wrap">
@@ -45,7 +37,7 @@
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="Search" />
 					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
+					&nbsp;<button type="submit" class="btn btn-default">Submit</button>
 				</form>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a id="login_href" data-toggle="modal" href="#login" data-target="#login">Login</a></li>
@@ -91,4 +83,11 @@
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 </body>
+<script type="text/javascript">
+$j(document).ready(function(){
+<t:if test="!user">
+		$j($j("#login_href").attr('data-target')).modal('toggle', $j("#login_href"))
+</t:if>
+});
+</script>
 </html>
