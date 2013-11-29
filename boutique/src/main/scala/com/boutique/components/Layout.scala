@@ -19,7 +19,6 @@ import org.apache.tapestry5.BindingConstants
  * @version: V1.0
  */
 @Import(library = Array(
-  "context:/static/js/jquery.min.js",
   "context:/static/js/bootstrap.min.js",
   "context:/static/js/CustomError.js"))
 class Layout {
