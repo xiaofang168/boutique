@@ -5,9 +5,9 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-6 col-md-3">
-			<a class="thumbnail" href="detail.html">
-				<img alt="" src="http://wbpreview.com/previews/WB0BMF1K5/img/product2.jpg" class="img-responsive"/>
-			</a>
+			<a t:type="pagelink" t:page="Detail" t:context="literal:PageLink with img" class="thumbnail">
+            	<img alt="" src="http://wbpreview.com/previews/WB0BMF1K5/img/product2.jpg" class="img-responsive"/>
+        	</a>
 			<div class="panel-title text-center">
 				<a href="single-item.html">HTC One V</a>
 			</div>
@@ -16,9 +16,9 @@
 			</div>
 		</div>
 		<div class="col-xs-6 col-md-3">
-			<a class="thumbnail" href="detail.html">
-				<img alt="" src="http://wbpreview.com/previews/WB0BMF1K5/img/product2.jpg" class="img-responsive"/>
-			</a>
+			<a t:type="pagelink" t:page="Detail" t:context="literal:PageLink with img" class="thumbnail">
+            	<img alt="" src="http://wbpreview.com/previews/WB0BMF1K5/img/product2.jpg" class="img-responsive"/>
+        	</a>
 			<div class="panel-title text-center">
 				<a href="detail.html">HTC One V</a>
 			</div>
@@ -27,9 +27,9 @@
 			</div>
 		</div>
 		<div class="col-xs-6 col-md-3">
-			<a class="thumbnail" href="detail.html">
-				<img alt="" src="http://wbpreview.com/previews/WB0BMF1K5/img/product2.jpg" class="img-responsive"/>
-			</a>
+			<a t:type="pagelink" t:page="Detail" t:context="literal:PageLink with img" class="thumbnail">
+            	<img alt="" src="http://wbpreview.com/previews/WB0BMF1K5/img/product2.jpg" class="img-responsive"/>
+        	</a>
 			<div class="panel-title text-center">
 				<a href="single-item.html">HTC One V</a>
 			</div>
@@ -38,9 +38,9 @@
 			</div>
 		</div>
 		<div class="col-xs-6 col-md-3">
-			<a class="thumbnail" href="detail.html">
-				<img alt="" src="http://wbpreview.com/previews/WB0BMF1K5/img/product2.jpg" class="img-responsive"/>
-			</a>
+			<a t:type="pagelink" t:page="Detail" t:context="literal:PageLink with img" class="thumbnail">
+            	<img alt="" src="http://wbpreview.com/previews/WB0BMF1K5/img/product2.jpg" class="img-responsive"/>
+        	</a>
 			<div class="panel-title text-center">
 				<a href="single-item.html">HTC One V</a>
 			</div>
