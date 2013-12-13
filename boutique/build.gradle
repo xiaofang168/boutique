@@ -20,7 +20,6 @@ task createScalaProject << {
 }
 
 repositories {
-	mavenCentral()
 	maven {
 			url 'http://mirrors.ibiblio.org/maven2/'
 			artifactUrls 'http://localhost:8081/nexus/content/groups/public/','http://repo1.maven.org/maven2','http://nexus.devlab722.net/nexus/content/repositories/releases/'
