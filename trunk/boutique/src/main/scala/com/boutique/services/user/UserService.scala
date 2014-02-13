@@ -20,7 +20,7 @@ trait UserService {
   def save(user: User): User
   
    /**
-   * @param username 用户名
+   * @param username 用户名/email
    * @return password 密码
    * return obj User 对象
    */
