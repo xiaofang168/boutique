@@ -23,7 +23,7 @@ class UserServiceImpl extends UserService {
   }
 
   def login(username: String, password: String): User = {
-    var user:User = crudDao.findUnique("from User u where u.username = ? and u.password = ?", Array(username, password))
+    var user:User = crudDao.findUnique("from User u where u.username = ? or u.email=? and u.password = ?", Array(username, username, password))
     return user
   }
 
