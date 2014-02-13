@@ -1,0 +1,23 @@
+<html  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"> 
+<head>
+<title>admin login</title>
+<link rel="stylesheet" type="text/css" href="${context:static/css/signin.css}"/>
+</head>
+<body>
+<body>
+	<div class="container">
+		<form class="form-signin" role="form"  t:type="CustomForm" t:id="loginForm">
+			<t:errors />
+			<h2 class="form-signin-heading">Please sign in</h2>
+			<input t:type="textfield" t:id="email" class="form-control" placeholder="Email address" required="required" autofocus="autofocus"/>
+			<input t:type="passwordfield"  t:id="password" class="form-control" placeholder="Password" required="required"/>
+			<t:CustomError for="password"/>
+			<label class="checkbox">
+			<t:Checkbox t:id="remember" type="checkbox" />Remember me
+			</label>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		</form>
+	</div> <!-- /container -->
+</body>
+</body>
+</html>
