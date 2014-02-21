@@ -24,7 +24,7 @@
 							<li><a href="#">Product List</a></li>
 							<li><a href="#">new Product</a></li>
 							<li><a href="#">Product Group</a></li>
-							<li><a href="#">Category</a></li>
+							<li><a t:type="pagelink" t:page="admin/product/category/list">Category</a></li>
 							<li class="divider">Comments</li>
 							<li><a href="#">Attribute</a></li>
 							<li class="divider">Option</li>
