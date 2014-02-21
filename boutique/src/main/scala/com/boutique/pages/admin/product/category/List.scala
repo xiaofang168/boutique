@@ -9,6 +9,11 @@
  */
 package com.boutique.pages.admin.product.category
 
+import com.boutique.entities.GoodsCate
+import org.apache.tapestry5.annotations.Property
+import com.boutique.dao.CrudDAO
+import org.apache.tapestry5.ioc.annotations.Inject
+
 /**
  * @ClassName: List
  * @Description: 产品列表
@@ -17,5 +22,18 @@ package com.boutique.pages.admin.product.category
  * @version: V1.0
  */
 class List {
+  
+  @Property
+  private var goodsCateList:scala.collection.immutable.List[GoodsCate] = _
+  
+  @Property
+  private var goodsCate:GoodsCate = _
+  
+  @Inject
+  private var crudDao:CrudDAO = _
+  
+  def setupRender()={
+    goodsCateList = crudDao.find("from GoodsCate o").asInstanceOf[scala.collection.immutable.List[GoodsCate]]
+  }
 
 }
