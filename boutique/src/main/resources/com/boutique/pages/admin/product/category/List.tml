@@ -1,5 +1,47 @@
-<html  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"> 
-<body>
-
+<html t:type="admin/layout" t:title="boutique Admin Index"
+      t:pageTitle="Admin Index"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:p="tapestry:parameter"> 
+<head>
+	<script type="text/javascript" src="${context:static/js/bootstrap-paginator.min.js}"></script>
+	<script type="text/javascript">
+		function init(){
+			var element = $j('#example');
+			var options = {
+				bootstrapMajorVersion:3,
+				currentPage: 1,
+				numberOfPages: 5,
+				totalPages:11
+			}
+			element.bootstrapPaginator(options);
+		}
+	</script>
+</head> 
+<body onload="init()">
+<div class="container">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Sort order</th>
+				<th>Operate</th>
+			</tr>
+		</thead>
+		<tbody>
+		<t:if test="goodsCateList.empty" negate="true">
+			<tr t:type="Loop" t:source="goodsCateList" t:value="goodsCate">
+		       <td>${goodsCate.id}</td>
+		       <td>${goodsCate.sortOrder}</td>
+		       <td>${goodsCate.nameKey}</td>
+		       <td></td>
+      		</tr>
+      	</t:if>
+		</tbody>
+	</table>
+	<div>
+		<ul id='example'></ul>
+	</div>
+</div>
 </body>
 </html>
