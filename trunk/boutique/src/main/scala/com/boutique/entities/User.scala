@@ -14,6 +14,7 @@ import javax.persistence.GenerationType
 class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name="id")
   var id:Long = _
   
   @Column(nullable = false)

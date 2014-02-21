@@ -30,19 +30,21 @@ class GoodsCate {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private var id: Long = _;
+  @Column(name="id")
+  var id: Long = _;
   
-  private var pid: Long = _;
+  var pid: Long = _;
   
-  @Column(nullable = false)
-  private var nameKey: String = _;
+  @Column(name="name_key",nullable = false)
+  var nameKey: String = _;
   
-  private var descriptionTxtkey: String = _;
-  private var metaTitleKey: String = _;
-  private var metaKeywordsTxtkey: String = _;
-  private var metaDescriptionTxtkey: String = _;
-  private var urlkey: String = _;
-  private var image: String = _;
-  private var sortOrder: Integer = _;
+  var descriptionTxtkey: String = _;
+  var metaTitleKey: String = _;
+  var metaKeywordsTxtkey: String = _;
+  var metaDescriptionTxtkey: String = _;
+  var urlkey: String = _;
+  var image: String = _;
+  @Column(name="sort_order")
+  var sortOrder: Integer = _;
   
 }
