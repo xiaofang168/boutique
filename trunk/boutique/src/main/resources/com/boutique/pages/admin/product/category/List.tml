@@ -1,5 +1,5 @@
 <html t:type="admin/layout" t:title="boutique Admin Index"
-      t:pageTitle="Admin Index"
+      t:pageTitle="Product Category List"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
       xmlns:p="tapestry:parameter"> 
 <head>
@@ -19,7 +19,10 @@
 </head> 
 <body onload="init()">
 <div class="container">
-	<table class="table table-hover">
+	<div>
+		Product > Category<br/><br/>
+	</div>
+	<table class="table table-hover" >
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -34,13 +37,16 @@
 		       <td>${goodsCate.id}</td>
 		       <td>${goodsCate.sortOrder}</td>
 		       <td>${goodsCate.nameKey}</td>
-		       <td></td>
+		       <td>Edit&nbsp;Delete</td>
       		</tr>
       	</t:if>
 		</tbody>
 	</table>
 	<div>
 		<ul id='example'></ul>
+	</div>
+	<div align="center">
+		<button class="btn btn-primary" t:type="chenillekit/Button"  type="button"  t:pageName="admin/product/category/Add" t:context="literal:chenillekit/Button with pageName">Add Category</button>
 	</div>
 </div>
 </body>
