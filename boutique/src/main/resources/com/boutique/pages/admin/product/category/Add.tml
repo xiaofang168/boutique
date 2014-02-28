@@ -3,21 +3,22 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
       xmlns:p="tapestry:parameter"> 
 <body>
-<div>
-	<div class="container">
-		<div>
-			Product > Category > Edit Category<br/><br/>
+<div class="container">
+	<div>
+		Product > Category > Edit Category<br/><br/>
+	</div>
+	<div class="row">
+		<div class="col-xs-3 col-md-3">
+		   	<div class="list-group">
+			  <a href="#" class="list-group-item active">General Information</a>
+			  <a href="#" class="list-group-item ">Image Information</a>
+			  <a href="#" class="list-group-item">Meta Information</a>
+			</div>
 		</div>
-		<div class="row">
-			<div class="col-xs-3 col-md-3">
-			   	<div class="list-group">
-				  <a href="#" class="list-group-item active">General Information</a>
-				  <a href="#" class="list-group-item ">Image Information</a>
-				  <a href="#" class="list-group-item">Meta Information</a>
-				</div>
-			</div>
-			<div class="col-xs-9 col-md-9">
-			</div>
+		<div class="col-xs-9 col-md-9">
+		 <t:zone t:id="editorZone" id="editorZone" t:update="prop:zoneUpdateFunction">
+                
+         </t:zone>
 		</div>
 	</div>
 </div>
