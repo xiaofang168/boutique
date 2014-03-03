@@ -39,12 +39,16 @@
 			</div>
 		</div>
 		<div class="col-xs-9 col-md-9">
-			<form class="form-horizontal" role="form" method="post" name="loginForm">
+			<form class="form-horizontal" role="form" t:type="CustomForm" t:id="categoryForm">
+				<div style="color:red">
+					<t:errors />
+				</div>
 				<div id="c_0">
 					<div class="form-group">
 						<label class="col-sm-3 control-label">Category Name:</label>
 						<div class="col-sm-4">
-							<input type="text" class="form-control" name="name" id="name"/>
+							<input t:type="TextField" class="form-control" t:id="nameKey" value="gc.nameKey"/>
+							<t:CustomError for="nameKey"/>
 						</div>
 					</div>
 					<div class="form-group">
