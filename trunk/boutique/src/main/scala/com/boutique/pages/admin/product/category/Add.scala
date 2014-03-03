@@ -9,6 +9,18 @@
  */
 package com.boutique.pages.admin.product.category
 
+import com.boutique.components.CustomForm
+import org.apache.tapestry5.annotations.Component
+import com.boutique.entities.GoodsCate
+import org.apache.tapestry5.annotations.Property
+import org.apache.tapestry5.annotations.OnEvent
+import org.apache.tapestry5.EventConstants
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+import org.apache.commons.lang.StringUtils
+import org.apache.tapestry5.corelib.components.TextField
+import org.apache.tapestry5.beaneditor.Validate
+
 /**
  * @ClassName: Add
  * @Description: 添加产品
@@ -17,5 +29,33 @@ package com.boutique.pages.admin.product.category
  * @version: V1.0
  */
 class Add {
+  
+  private var log:Logger = LoggerFactory.getLogger(classOf[Add])
+  
+  @Component(id = "categoryForm")
+  private var form: CustomForm = _
+  
+  @Property
+  private var gc:GoodsCate = new GoodsCate()
+  
+  @Component(id = "nameKey")
+  private var nameKeyField: TextField = _
+  
+  @Property
+  @Validate("required")
+  private var nameKey: String = _
+  
+  def onValidateFromCategoryForm() {
+    if (StringUtils.isBlank(gc.nameKey)) {
+        form.recordError(nameKeyField, "Category Name not null!");
+    }
+  }
+  
+  @OnEvent(value = EventConstants.SUCCESS, component = "categoryForm")
+  def onSubmitFromCategoryForm(): Object = {
+    log.debug("nameKey:"+gc.nameKey)
+    return classOf[Add]
+  }
+  
   
 }
