@@ -20,6 +20,9 @@ import org.slf4j.LoggerFactory
 import org.apache.commons.lang.StringUtils
 import org.apache.tapestry5.corelib.components.TextField
 import org.apache.tapestry5.beaneditor.Validate
+import javax.validation.constraints.NotNull
+import javax.validation.constraints.Pattern
+
 
 /**
  * @ClassName: Add
@@ -42,7 +45,7 @@ class Add {
   private var nameKeyField: TextField = _
   
   @Property
-  @Validate("required")
+  @NotNull(message="nameKey not null")
   private var nameKey: String = _
   
   def onValidateFromCategoryForm() {
