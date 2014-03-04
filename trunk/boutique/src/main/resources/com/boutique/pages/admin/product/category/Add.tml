@@ -39,7 +39,7 @@
 			</div>
 		</div>
 		<div class="col-xs-9 col-md-9">
-			<form class="form-horizontal" role="form" t:type="CustomForm" t:id="categoryForm">
+			<form class="form-horizontal" role="form" t:type="CustomForm" t:id="categoryForm" validate="this">
 				<div style="color:red">
 					<t:errors />
 				</div>
