@@ -45,12 +45,13 @@ class Add {
   private var nameKeyField: TextField = _
   
   @Property
-  @NotNull(message="nameKey not null")
+  @NotNull(message="{notnull}")
+  @Validate("maxlength=8")
   private var nameKey: String = _
   
   def onValidateFromCategoryForm() {
     if (StringUtils.isBlank(gc.nameKey)) {
-        form.recordError(nameKeyField, "Category Name not null!");
+        form.recordError(nameKeyField, "Category Name not be null!");
     }
   }
   
