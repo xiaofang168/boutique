@@ -47,7 +47,7 @@
 					<div class="form-group">
 					    <t:label class="col-sm-3 control-label" for="nameKey">Category Name:</t:label>
 						<div class="col-sm-4">
-							<input t:type="TextField" class="form-control" t:label="Category Name" t:id="nameKey"/>
+							<input t:type="TextField" class="form-control" t:id="nameKey"/>
 							<t:CustomError for="nameKey"/>
 						</div>
 					</div>
