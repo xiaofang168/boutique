@@ -9,6 +9,8 @@
  */
 package com.boutique.dao
 
+import org.apache.tapestry5.hibernate.annotations.CommitAfter
+
 
 /**
  * @ClassName: CrudDAO
@@ -19,6 +21,7 @@ package com.boutique.dao
  */
 trait CrudDAO {
 
+	@CommitAfter
 	def save[T](t: T):T
 	
 	def get[T, PK  <: java.io.Serializable](clType: Class[T], id: PK ):T
