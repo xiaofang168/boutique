@@ -24,7 +24,7 @@ object AppModule {
   def contributeApplicationDefaults(configuration: MappedConfiguration[String, String]) {
     configuration.add(SymbolConstants.DEFAULT_STYLESHEET, "context:static/css/default.css")
     configuration.add(HibernateSymbols.EARLY_START_UP, "true")
-    configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en")
+    configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en,zh")
     configuration.add(SymbolConstants.PRODUCTION_MODE, "false")
     configuration.add(SymbolConstants.HMAC_PASSPHRASE, "MD5")
     configuration.add(SymbolConstants.APPLICATION_VERSION, "1.0-SNAPSHOT")
