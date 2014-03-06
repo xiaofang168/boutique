@@ -22,7 +22,9 @@ import org.apache.tapestry5.corelib.components.TextField
 import org.apache.tapestry5.beaneditor.Validate
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Pattern
-
+import com.boutique.dao.CrudDAO
+import org.apache.tapestry5.ioc.annotations.Inject
+import org.apache.tapestry5.annotations.InjectComponent
 
 /**
  * @ClassName: Add
@@ -35,13 +37,17 @@ class Add {
   
   private var log:Logger = LoggerFactory.getLogger(classOf[Add])
   
+  @Inject
+  private var dao:CrudDAO = _
+  
   @Component(id = "categoryForm")
   private var form: CustomForm = _
   
   @Property
   private var gc:GoodsCate = new GoodsCate()
   
-  @Component(id = "nameKey")
+
+  @InjectComponent("nameKey")
   private var nameKeyField: TextField = _
   
   @Property
@@ -57,7 +63,7 @@ class Add {
   
   @OnEvent(value = EventConstants.SUCCESS, component = "categoryForm")
   def onSubmitFromCategoryForm(): Object = {
-    log.debug("nameKey:"+gc.nameKey)
+    dao.save(gc)
     return classOf[Add]
   }
   
