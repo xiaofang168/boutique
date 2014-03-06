@@ -7,9 +7,11 @@ import org.apache.tapestry5.annotations.Property
 import org.apache.tapestry5.ioc.annotations.Inject
 import com.boutique.entities.User
 import com.boutique.services.user.internal.Authenticator
-import javax.persistence.Entity
-import javax.persistence.Table
 import org.apache.tapestry5.BindingConstants
+import org.slf4j.LoggerFactory
+import org.slf4j.Logger
+import org.apache.tapestry5.ioc.annotations.Symbol
+import org.apache.tapestry5.SymbolConstants
 
 /**
  * @ClassName: Layout
@@ -23,13 +25,20 @@ import org.apache.tapestry5.BindingConstants
   "context:/static/js/CustomError.js"))
 class Layout {
   
+  private var logger:Logger = LoggerFactory.getLogger(classOf[Layout])
+  
+  @Symbol(SymbolConstants.SUPPORTED_LOCALES)
+  @Inject
+  private var locales:String = _
+  
   @Property
   @Parameter(required = true, defaultPrefix = BindingConstants.LITERAL)
   private var pageTitle: String = _
 
   @Inject
   private var authenticator: Authenticator = _
-  
+
+  // 获取用户对象，判断用户是否登录
   def getUser(): User = {
     if (authenticator.isLoggedIn()) authenticator.getLoggedUser() else null
   }
