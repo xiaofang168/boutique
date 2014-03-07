@@ -25,6 +25,7 @@ import javax.validation.constraints.Pattern
 import com.boutique.dao.CrudDAO
 import org.apache.tapestry5.ioc.annotations.Inject
 import org.apache.tapestry5.annotations.InjectComponent
+import org.apache.tapestry5.upload.services.UploadedFile
 
 /**
  * @ClassName: Add
@@ -49,6 +50,10 @@ class Add {
 
   @InjectComponent("nameKey")
   private var nameKeyField: TextField = _
+  
+  
+  @Property
+  private var file: UploadedFile = _
   
   @Property
   @NotNull(message="{notnull}")
