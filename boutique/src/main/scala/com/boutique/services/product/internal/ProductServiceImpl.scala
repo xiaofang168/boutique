@@ -14,6 +14,8 @@ import org.slf4j.LoggerFactory
 import com.boutique.services.product.ProductService
 import java.util.Locale
 import java.util.ResourceBundle
+import org.apache.tapestry5.internal.services.PersistentLocaleImpl
+import com.boutique.AppConstant
 
 /**
  * @ClassName: ProductServiceImpl
@@ -29,7 +31,8 @@ class ProductServiceImpl extends ProductService{
   def checkimageType(value:String):String ={
      var locale :Locale = null
      var result =  Locale.getDefault().toString().split("_")
-     locale= new Locale(result(0))
+     locale= new Locale(AppConstant.LOCALE_MESSAGE)
+     logger.debug(AppConstant.LOCALE_MESSAGE)
      var resb = ResourceBundle.getBundle("com/boutique/pages/admin/product/category/Add", locale)
      logger.debug(resb.getString("uploadImgTypeError"))
      resb.getString("uploadImgTypeError")
