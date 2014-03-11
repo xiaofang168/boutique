@@ -21,5 +21,7 @@ object AppConstant {
   val EHCACH_EABLE: Boolean = true
   
   val USER_INFO: String = "userInfo"
+
+  var LOCALE_MESSAGE:String = "zh"
   
 }

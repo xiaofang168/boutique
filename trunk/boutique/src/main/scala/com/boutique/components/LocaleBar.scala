@@ -22,6 +22,7 @@ import org.apache.tapestry5.annotations.SetupRender
 import org.apache.commons.lang.StringUtils
 import org.slf4j.LoggerFactory
 import org.slf4j.Logger
+import com.boutique.AppConstant
 
 class LocaleBar {
   
@@ -48,6 +49,7 @@ class LocaleBar {
 	}else{
 		this.locale = persistentLocale.get().getLanguage()
 	}
+    AppConstant.LOCALE_MESSAGE = this.locale
   }
   
   def getLocales(): Array[String] = {
