@@ -8,16 +8,17 @@
  */
 package com.boutique.pages.admin
 
-import org.apache.tapestry5.annotations.Import
-import org.apache.tapestry5.beaneditor.Validate
-import org.apache.tapestry5.annotations.Property
-import com.boutique.services.user.UserService
-import org.apache.tapestry5.ioc.annotations.Inject
-import org.apache.tapestry5.services.Request
-import com.boutique.AppConstant
-import com.boutique.components.CustomForm
 import org.apache.tapestry5.annotations.Component
 import org.apache.tapestry5.annotations.Persist
+import org.apache.tapestry5.annotations.Property
+import org.apache.tapestry5.annotations.SessionState
+import org.apache.tapestry5.beaneditor.Validate
+import org.apache.tapestry5.ioc.annotations.Inject
+import com.boutique.components.CustomForm
+import com.boutique.entities.User
+import com.boutique.services.user.UserService
+import javax.persistence.Entity
+import javax.persistence.Table
 import org.apache.tapestry5.PersistenceConstants
 
 /**
@@ -32,11 +33,11 @@ class Login {
   @Inject
   private var userService: UserService = _
   
-  @Inject
-  private var request: Request = _
-  
   @Component(id = "loginForm")
   private var form: CustomForm = _
+  
+  @SessionState(create=false)
+  private var user: User = _
   
   @Property
   @Validate("required,email")
@@ -51,8 +52,7 @@ class Login {
   private var password: String = _
   
   def onSubmitFromLoginForm(): Object = {
-    var user = userService.login(email, password)
-    request.getSession(false).setAttribute(AppConstant.USER_INFO,user)
+    user = userService.login(email, password)
     return classOf[Index]
   }
   
