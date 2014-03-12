@@ -23,12 +23,14 @@ import org.apache.commons.lang.StringUtils
 import org.slf4j.LoggerFactory
 import org.slf4j.Logger
 import com.boutique.AppConstant
+import org.apache.tapestry5.annotations.SessionAttribute
 
 class LocaleBar {
   
   private var logger:Logger = LoggerFactory.getLogger(classOf[LocaleBar])
   
   @Property
+  @SessionAttribute("locale")
   private var locale: String = _
 
   @Inject
