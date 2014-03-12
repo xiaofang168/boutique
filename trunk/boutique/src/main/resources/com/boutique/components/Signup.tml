@@ -1,12 +1,12 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd" xmlns:p="tapestry:parameter">
-<form class="form-horizontal" role="form"  t:type="CustomForm"  t:id="registerForm">
+<form class="form-horizontal" role="form"  t:type="CustomForm"  t:id="registerForm" validate="this">
 	<div style="color:red">
 		<t:errors />
 	</div>
 	<div class="form-group">
-		<label for="username_0" class="col-lg-4 control-label">Username</label>
+		<t:label class="col-lg-4 control-label" for="username">${message:username-label}</t:label>
 		<div class="col-lg-6">
-			<input class="form-control"  t:id="username" t:type="textfield"  placeholder="Username"/>
+			<input t:type="TextField" class="form-control" t:id="username"/>
 			<t:CustomError for="username"/>
 		</div>
 	</div>
