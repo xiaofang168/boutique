@@ -5,11 +5,10 @@ import org.junit.Assert
 import org.junit.Test
 
 import com.boutique.Container
+import com.boutique.commons.AuthenticationException
 import com.boutique.dao.CrudDAO
 import com.boutique.entities.User
-
-import javax.persistence.Entity
-import javax.persistence.Table
+import com.boutique.services.user.internal.Authenticator
 
 /**
  * @ClassName: UserServiceTest
@@ -21,17 +20,17 @@ import javax.persistence.Table
 class UserServiceTest {
 	
 	private var userService: UserService  = Container.getInstance().getService(classOf[UserService])
+	private var authenticator: Authenticator = Container.getInstance().getService(classOf[Authenticator])
 	private var crudDao: CrudDAO  = Container.getInstance().getService(classOf[CrudDAO])
 	
-	
 	@Test
-	def testFind() {
+	def testFind() = {
 	   var list = crudDao.find("from User u")
 	   Assert.assertTrue(list.isEmpty)
 	}
 	
 	@Test
-	def testSave() {
+	def testSave() = {
 		var user = new User
 		user.username = "fangjie"
 		user.password = "123456"
@@ -40,9 +39,9 @@ class UserServiceTest {
 	}
 
 	@Test
-	def testLogin() {
-		var user = userService.login("fangjie", "12345")
+	def testLogin() = {
+		var user = authenticator.login("fangjie", "12345")
 		Assert.assertEquals(null, user)
 	}
-
+	
 }

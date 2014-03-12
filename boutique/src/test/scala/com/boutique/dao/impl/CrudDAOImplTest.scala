@@ -29,7 +29,7 @@ class CrudDAOImplTest{
 	private var crudDao: CrudDAO  = Container.getInstance().getService(classOf[CrudDAO])
 	
 	@Test
-	def testSave() {
+	def testSave() = {
 		var user = new User
 		user.username = "fangjie"
 		user.password = "1234"
@@ -39,23 +39,29 @@ class CrudDAOImplTest{
 
 	
 	@Test
-	def testGet() {
+	def testGet() = {
 		var user = crudDao.get(classOf[User], 1l.asInstanceOf[java.io.Serializable])
 		Assert.assertEquals(1, user.id)
 	}
 	
 	@Test
-	def testFind(){
+	def testFind() = {
 	  testSave
 	  var list = crudDao.find("from User")
 	  Assert.assertEquals(1, list.size)
 	}
 	
 	@Test
-	def getFindHqlParams(){
+	def getFindHqlParams() = {
 	  testSave
 	  var list = crudDao.find("from User u where u.username = ? and u.password = ?",Array("fangjie","1234"))
 	  Assert.assertEquals(1, list.size)
+	}
+	
+	@Test
+	def signUp() = {
+	   var userVerif = crudDao.find("from User u where u.username=? and u.email=?", Array("xiaofang168", "hbxffj@163.com"))
+	   Assert.assertTrue(userVerif.isEmpty)
 	}
 
 }
