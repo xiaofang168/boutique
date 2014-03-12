@@ -29,7 +29,10 @@ import com.boutique.dao.CrudDAO
 import com.boutique.entities.GoodsCate
 import javax.validation.constraints.NotNull
 import org.apache.tapestry5.EventConstants
-
+import org.apache.tapestry5.annotations.SessionAttribute
+import org.apache.tapestry5.annotations.Persist
+import org.apache.tapestry5.PersistenceConstants
+import org.apache.tapestry5.annotations.Import
 /**
  * @ClassName: Add
  * @Description: 添加产品
@@ -37,6 +40,13 @@ import org.apache.tapestry5.EventConstants
  * @date: 2014-2-13 下午3:58:31
  * @version: V1.0
  */
+@Import(
+    stylesheet=Array[String]("context:static/kindeditor/themes/default/default.css"),
+    library=Array[String]("context:static/kindeditor/kindeditor-min.js",
+		"context:static/kindeditor/lang/zh_CN.js",
+		"context:static/js/utils.js",
+		"classpath:com/boutique/pages/admin/product/category/Add.js"
+))
 class Add {
   
   private var logger:Logger = LoggerFactory.getLogger(classOf[Add])
@@ -69,7 +79,12 @@ class Add {
   @Validate("maxlength=8")
   private var nameKey: String = _
   
+  @SessionAttribute("locale")
+  @Property
+  private var locale:String = _
+  
   def setupRender() {
+	  	logger.debug(locale)
 	  	javaScriptSupport.importJavaScriptLibrary(request.getContextPath()+"/dwr/interface/productServiceJs.js")
 	  	javaScriptSupport.importJavaScriptLibrary(request.getContextPath()+"/dwr/util.js")
 	  	javaScriptSupport.importJavaScriptLibrary(request.getContextPath()+"/dwr/engine.js")

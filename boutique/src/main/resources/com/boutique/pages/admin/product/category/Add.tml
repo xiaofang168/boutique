@@ -2,11 +2,6 @@
       t:pageTitle="Product Category Edit Category"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
       xmlns:p="tapestry:parameter">
-<head>
-<title>Product Category Edit Category</title>
-<link rel="stylesheet" type="text/css" href="${context:static/kindeditor/themes/default/default.css}"/>
-<script type="text/javascript" src="${context:static/kindeditor/kindeditor-min.js}"></script>
-<script type="text/javascript" src="${context:static/kindeditor/lang/zh_CN.js}"></script>
 <script type="text/javascript">
 	KindEditor.ready(function(K) {
 			window.editor = K.create('#editor_id');
@@ -41,14 +36,22 @@
 	}
 	function init(){
 		$j("#file").change(function(){
-			var reg = /\.(gif|jpg|jpeg|tiff|png)$/i
-	        if(reg.test(this.value)){
-	            readPath(this);
+			if(this.value!=""){
+				var reg = /\.(gif|jpg|jpeg|tiff|png)$/i
+		        if(reg.test(this.value)){
+		            readPath(this);
+		            $j("#uploadMessage").html("");
+		        }else{
+		        	$j("#uploadMessage").html(uploadImgMessage.get("uploadImgTypeError").get("${locale}"));
+		        	$j('#blah').attr('src', "");
+		        }
+	        }else{
+	        	$j('#blah').attr('src', "");
+	        	$j("#uploadMessage").html("");
 	        }
 		});
 	}
 </script>
-</head>
 <body onload="init()">
 <div class="container">
 	<div>
@@ -111,6 +114,7 @@
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
 							<input type="file" t:type="upload"  t:id="file"/>
+							<div id="uploadMessage" style="color:red"></div>
 						</div>
 					</div>
 				</div>
