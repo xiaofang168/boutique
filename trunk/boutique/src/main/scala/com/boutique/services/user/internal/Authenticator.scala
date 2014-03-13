@@ -8,6 +8,8 @@ import com.boutique.AppConstant
 import com.boutique.entities.User
 import com.boutique.commons.AuthenticationException
 import com.boutique.dao.CrudDAO
+import org.apache.tapestry5.annotations.SessionState
+import org.apache.tapestry5.ioc.Messages
 
 /**
  * @ClassName: Authenticator
@@ -19,42 +21,28 @@ import com.boutique.dao.CrudDAO
 class Authenticator {
 
   @Inject
-  private var crudao: CrudDAO = _
+  private var messages: Messages = _
 
   @Inject
-  private var request: Request = _
+  private var crudao: CrudDAO = _
+
+  @SessionState(create=false)
+  private var user: User = _
 
   def isLoggedIn(): Boolean = {
-    var session = request.getSession(false)
-    if (session != null) { return session.getAttribute(AppConstant.USER_INFO) != null }
-    return false;
+    return user != null
   }
 
   def logout() {
-    var session = request.getSession(false)
-    if (session != null) {
-      session.setAttribute(AppConstant.USER_INFO, null)
-      session.invalidate()
-    }
+    user = null
   }
 
   @throws(classOf[AuthenticationException])
-  def login(username: String, password: String) {
-    var user = crudao.findUnique("from User u where u.username=? and u.password=?", Array(username, password))
+  def login(username: String, password: String) = {
+    user = crudao.findUnique("from User u where u.username = ? or u.email=? and u.password = ?", Array(username, username, password))
     if (user == null) {
-      throw new AuthenticationException("The user doesn't exist")
+      throw new AuthenticationException(messages.get("error.usernotexists"))
     }
-    request.getSession(true).setAttribute(AppConstant.USER_INFO, user)
-  }
-
-  def getLoggedUser(): User = {
-    var user: User = null
-    if (isLoggedIn()) {
-      user = request.getSession(true).getAttribute(AppConstant.USER_INFO).asInstanceOf[User]
-    } else {
-      throw new IllegalStateException("The user is not logged ! ")
-    }
-    return user
   }
 
 }
