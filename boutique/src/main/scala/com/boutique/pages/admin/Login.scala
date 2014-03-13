@@ -11,14 +11,11 @@ package com.boutique.pages.admin
 import org.apache.tapestry5.annotations.Component
 import org.apache.tapestry5.annotations.Persist
 import org.apache.tapestry5.annotations.Property
-import org.apache.tapestry5.annotations.SessionState
 import org.apache.tapestry5.beaneditor.Validate
 import org.apache.tapestry5.ioc.annotations.Inject
+import com.boutique.commons.AuthenticationException
 import com.boutique.components.CustomForm
-import com.boutique.entities.User
-import com.boutique.services.user.UserService
-import javax.persistence.Entity
-import javax.persistence.Table
+import com.boutique.services.user.internal.Authenticator
 import org.apache.tapestry5.PersistenceConstants
 
 /**
@@ -31,13 +28,10 @@ import org.apache.tapestry5.PersistenceConstants
 class Login {
 
   @Inject
-  private var userService: UserService = _
+  private var authenticator: Authenticator = _
   
   @Component(id = "loginForm")
   private var form: CustomForm = _
-  
-  @SessionState(create=false)
-  private var user: User = _
   
   @Property
   @Validate("required,email")
@@ -52,7 +46,7 @@ class Login {
   private var password: String = _
   
   def onSubmitFromLoginForm(): Object = {
-    user = userService.login(email, password)
+	authenticator.login(email, password)
     return classOf[Index]
   }
   
