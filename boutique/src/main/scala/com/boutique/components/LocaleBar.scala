@@ -10,25 +10,26 @@
 package com.boutique.components
 
 import java.util.Locale
+
 import scala.collection.immutable.List
+
 import org.apache.tapestry5.SymbolConstants
 import org.apache.tapestry5.annotations.Property
 import org.apache.tapestry5.annotations.Service
+import org.apache.tapestry5.annotations.SessionAttribute
+import org.apache.tapestry5.annotations.SetupRender
 import org.apache.tapestry5.ioc.annotations.Inject
 import org.apache.tapestry5.ioc.services.SymbolProvider
 import org.apache.tapestry5.services.PersistentLocale
-import com.boutique.model.LocaleSelectModel
-import org.apache.tapestry5.annotations.SetupRender
-import org.apache.commons.lang.StringUtils
-import org.slf4j.LoggerFactory
 import org.slf4j.Logger
-import com.boutique.AppConstant
-import org.apache.tapestry5.annotations.SessionAttribute
+import org.slf4j.LoggerFactory
+
+import com.boutique.model.LocaleSelectModel
 
 class LocaleBar {
-  
-  private var logger:Logger = LoggerFactory.getLogger(classOf[LocaleBar])
-  
+
+  private var logger: Logger = LoggerFactory.getLogger(classOf[LocaleBar])
+
   @Property
   @SessionAttribute("locale")
   private var locale: String = _
@@ -45,15 +46,18 @@ class LocaleBar {
 
   @SetupRender
   def initLocale() {
-    if (persistentLocale.get()==null) {
-        var result =  Locale.getDefault().toString().split("_")
-        this.locale = result(0)
-	}else{
-		this.locale = persistentLocale.get().getLanguage()
-	}
-    AppConstant.LOCALE_MESSAGE = this.locale
+    if (persistentLocale.get() == null) {
+      this.locale = Locale.getDefault().toString().toLowerCase()
+      logger.debug(locale)
+    } else {
+      this.locale = persistentLocale.get().getLanguage()
+      if (this.locale.contains("zh")) {
+        this.locale = "zh_cn"
+      }
+      logger.debug(locale)
+    }
   }
-  
+
   def getLocales(): Array[String] = {
     var symbol = symbolProvider.valueForSymbol(SymbolConstants.SUPPORTED_LOCALES)
     symbol.split(",")
@@ -78,6 +82,7 @@ class LocaleBar {
 
   def onSubmitFromForm() {
     persistentLocale.set(toLocale(locale))
+    logger.debug(persistentLocale.get().getLanguage())
   }
 
 }
