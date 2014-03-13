@@ -5,17 +5,18 @@ import org.apache.tapestry5.annotations.Component
 import org.apache.tapestry5.annotations.OnEvent
 import org.apache.tapestry5.annotations.Property
 import org.apache.tapestry5.beaneditor.Validate
-import org.apache.tapestry5.hibernate.annotations.CommitAfter
 import org.apache.tapestry5.ioc.Messages
 import org.apache.tapestry5.ioc.annotations.Inject
-import com.boutique.commons.AuthenticationException
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import com.boutique.dao.CrudDAO
 import com.boutique.entities.User
 import com.boutique.pages.Index
 import com.boutique.services.user.UserService
 import com.boutique.services.user.internal.Authenticator
-import javax.persistence.Entity
-import javax.persistence.Table
+import javax.validation.constraints.NotNull
+import javax.validation.constraints.Pattern
+import javax.validation.constraints.Size
 import org.apache.tapestry5.EventConstants
 
 /**
@@ -27,8 +28,12 @@ import org.apache.tapestry5.EventConstants
  */
 class Signup {
 
+  private var logger:Logger = LoggerFactory.getLogger(classOf[Signup])
+   
   @Property
-  @Validate("required, minlength=3, maxlength=50")
+  @NotNull(message="{notnull}")
+  @Size(min=3,max=10,message="{usernameSize}")
+  @Pattern(regexp="^([A-Za-z]|[\\d])*$",message="{usernameRegexp}")
   private var username: String = _
 
   @Property
@@ -68,7 +73,8 @@ class Signup {
   @OnEvent(value = EventConstants.SUCCESS, component = "RegisterForm")
   def proceedSignup(): Object = {
     var userVerif = crudDao.find("from User u where u.username=? and u.email=?", Array(username, email))
-    if (userVerif != null) {
+    logger.debug("userVerif"+userVerif)
+    if (!userVerif.isEmpty) {
       form.recordError(messages.get("error.userexists"))
       return null;
     }
