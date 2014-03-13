@@ -1,7 +1,11 @@
 package com.boutique.services.user
 
-import com.boutique.entities.User
 import org.apache.tapestry5.hibernate.annotations.CommitAfter
+
+import com.boutique.entities.User
+
+import javax.persistence.Entity
+import javax.persistence.Table
 
 /**
  * @ClassName: UserService
@@ -19,10 +23,4 @@ trait UserService {
   @CommitAfter
   def save(user: User): User
   
-   /**
-   * @param username 用户名/email
-   * @return password 密码
-   * return obj User 对象
-   */
-  def login(username:String, password:String):User
 }
