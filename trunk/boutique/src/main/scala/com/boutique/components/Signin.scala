@@ -14,6 +14,11 @@ import org.apache.tapestry5.PersistenceConstants
 import org.apache.tapestry5.corelib.components.TextField
 import org.apache.tapestry5.services.Request
 import com.boutique.AppConstant
+import org.apache.tapestry5.annotations.SessionState
+import com.boutique.entities.User
+import org.slf4j.LoggerFactory
+import org.slf4j.Logger
+import com.boutique.services.user.internal.Authenticator
 
 /**
  * @ClassName: Signin
@@ -23,7 +28,8 @@ import com.boutique.AppConstant
  * @version: V1.0
  */
 class Signin {
-
+  private var logger:Logger = LoggerFactory.getLogger(classOf[Signin])
+  
   @Inject
   private var userService: UserService = _
 
@@ -45,20 +51,21 @@ class Signin {
 
   @Inject
   private var messages: Messages = _
+  
+  @Inject
+  private var authenticator: Authenticator = _
 
   def onValidateFromLoginForm() {
-    // Error if the names don't contain letters only
     if (username != null) {
-      if (!username.matches("[A-Za-z]+")) {
-        form.recordError(usernameField, "Username must contain letters only");
+      if (!username.matches("^([A-Za-z]|[\\d])*$")) {
+        form.recordError(usernameField, messages.get("error.username"));
       }
     }
   }
 
   @Log
   def onSubmitFromLoginForm(): Object = {
-    var user = userService.login(username, password)
-    request.getSession(false).setAttribute(AppConstant.USER_INFO,user)
+    authenticator.login(username, password)
     return classOf[Index]
   }
 
