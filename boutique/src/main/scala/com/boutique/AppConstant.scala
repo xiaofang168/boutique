@@ -18,8 +18,8 @@ package com.boutique
  */
 object AppConstant {
 
-  val EHCACH_EABLE: Boolean = true
+  final val EHCACH_EABLE: Boolean = true
   
-  val USER_INFO: String = "userInfo"
+  final val USER_INFO: String = "userInfo"
   
 }
