@@ -14,6 +14,8 @@ import org.apache.tapestry5.OptionModel
 import org.apache.tapestry5.internal.OptionModelImpl
 import org.apache.tapestry5.OptionGroupModel
 import java.util.Locale
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * @ClassName: LocaleSelectModel
@@ -23,7 +25,9 @@ import java.util.Locale
  * @version: V1.0
  */
 class LocaleSelectModel(Locales: List[Locale]) extends  AbstractSelectModel{
-
+	
+	private var logger:Logger = LoggerFactory.getLogger(classOf[LocaleSelectModel])
+  
     override def getOptionGroups(): java.util.List[OptionGroupModel] = {
         return null
     }
@@ -31,7 +35,7 @@ class LocaleSelectModel(Locales: List[Locale]) extends  AbstractSelectModel{
     override def getOptions():java.util.List[OptionModel] = {
         var options = List[OptionModel]()
         Locales.foreach(locale=>{
-          options ::=  new OptionModelImpl(locale.getDisplayName(),locale.getLanguage())
+          options ::=  new OptionModelImpl(locale.getDisplayName().replaceAll("zh_cn", "中文"),locale.getLanguage())
         })
         scala.collection.JavaConversions.asJavaList(options)
     }
