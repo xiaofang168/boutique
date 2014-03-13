@@ -33,6 +33,7 @@ import org.apache.tapestry5.annotations.SessionAttribute
 import org.apache.tapestry5.annotations.Persist
 import org.apache.tapestry5.PersistenceConstants
 import org.apache.tapestry5.annotations.Import
+import org.apache.tapestry5.ioc.Messages
 /**
  * @ClassName: Add
  * @Description: 添加产品
@@ -70,13 +71,15 @@ class Add {
   @InjectComponent("nameKey")
   private var nameKeyField: TextField = _
   
+  @Inject
+  private var messages: Messages = _
   
   @Property
   private var file: UploadedFile = _
   
   @Property
   @NotNull(message="{notnull}")
-  @Validate("maxlength=8")
+  @Validate("required,maxlength=8")
   private var nameKey: String = _
   
   @SessionAttribute("locale")
@@ -92,7 +95,7 @@ class Add {
   
   def onValidateFromCategoryForm() {
     if (StringUtils.isBlank(gc.nameKey)) {
-        form.recordError(nameKeyField, "Category Name not be null!");
+        form.recordError(nameKeyField, messages.get("nameKey-required-message"));
     }
   }
   
