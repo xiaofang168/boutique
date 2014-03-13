@@ -10,6 +10,7 @@ import com.boutique.services.user.internal.Authenticator
 import javax.persistence.Entity
 import javax.persistence.Table
 import org.apache.tapestry5.BindingConstants
+import org.apache.tapestry5.annotations.SessionState
 
 /**
  * @ClassName: Layout
@@ -30,8 +31,11 @@ class Layout {
   @Inject
   private var authenticator: Authenticator = _
   
+  @SessionState
+  private var user: User = _
+  
   def getUser(): User = {
-    if (authenticator.isLoggedIn()) authenticator.getLoggedUser() else null
+		 return user
   }
   
 }
