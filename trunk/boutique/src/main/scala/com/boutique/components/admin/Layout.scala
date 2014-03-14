@@ -15,7 +15,6 @@ import org.apache.tapestry5.SymbolConstants
 import org.apache.tapestry5.annotations.SessionState
 import org.apache.tapestry5.annotations.SessionAttribute
 import com.boutique.AppConstant
-import com.boutique.AppConstantJava
 
 /**
  * @ClassName: Layout
@@ -42,7 +41,7 @@ class Layout {
   @Inject
   private var authenticator: Authenticator = _
   
-  @SessionAttribute(AppConstant.USER_INFO)
+  @SessionAttribute()
   private var user: User = _
 
   // 获取用户对象，判断用户是否登录
