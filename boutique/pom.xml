@@ -144,7 +144,8 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>build-helper-maven-plugin</artifactId>
-					<version>1.4</version>
+					<version>1.8</version>
+					<!-- 添加主源码目录 -->
 					<executions>
 						<execution>
 							<id>add-source</id>
@@ -154,8 +155,33 @@
 							</goals>
 							<configuration>
 								<sources>
-									<source>src/main/java</source>
+									<source>src/main/three</source>
 								</sources>
+							</configuration>
+						</execution>
+						<!-- 添加主资源文件目录 -->
+						<execution>
+							<!--自定义名称,不可重复 -->
+							<id>add-resource</id>
+							<!--指定绑定到生命周期 -->
+							<phase>generate-sources</phase>
+							<!--指定指定的目标,可添加多个 -->
+							<goals>
+								<goal>add-resource</goal>
+							</goals>
+							<configuration>
+								<resources>
+									<!--资源文件目录,可添加多个 -->
+									<resource>
+										<directory>${basedir}/src/main/one</directory>
+										<!--是否启用变量过滤 -->
+										<filtering>true</filtering>
+										<!--排除的文件,可添加多个 -->
+										<excludes>
+											<exclude>**/*.java</exclude>
+										</excludes>
+									</resource>
+								</resources>
 							</configuration>
 						</execution>
 						<execution>
@@ -166,7 +192,7 @@
 							</goals>
 							<configuration>
 								<sources>
-									<source>src/main/resource</source> 
+									<source>${basedir}/src/main/five</source>
 								</sources>
 							</configuration>
 						</execution>
