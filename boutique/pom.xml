@@ -123,35 +123,55 @@
 		</pluginRepository>
 	</pluginRepositories>
 	<build>
-		<sourceDirectory>src/main/conf/development</sourceDirectory>
+		<sourceDirectory>src/main/scala</sourceDirectory>
 		<testSourceDirectory>src/test/scala</testSourceDirectory>
 		<resources>
 			<resource>
-				<directory>src/main/conf/development</directory>
-			</resource>
-			<resource>
-				<directory>src/main/scala</directory>
-				<excludes>
-					<exclude>**/*.scala</exclude>
-				</excludes>
-			</resource>
-			<resource>
 				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/main/conf/development</directory>
 			</resource>
 		</resources>
 		<testResources>
-			<testResource>
-				<directory>src/test/scala</directory>
-				<excludes>
-					<exclude>**/*.scala</exclude>
-				</excludes>
-			</testResource>
 			<testResource>
 				<directory>src/test/resources</directory>
 			</testResource>
 		</testResources>
 		<pluginManagement>
 			<plugins>
+				<!-- Adds src/main/scala and src/test/scala as source folders, from http://groups.google.com/group/liftweb/browse_thread/thread/3dac7002f9e59546/3918bba2f7a92cd3?pli=1 -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>1.4</version>
+					<executions>
+						<execution>
+							<id>add-source</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>add-source</goal>
+							</goals>
+							<configuration>
+								<sources>
+									<source>src/main/java</source>
+								</sources>
+							</configuration>
+						</execution>
+						<execution>
+							<id>add-test-source</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>add-test-source</goal>
+							</goals>
+							<configuration>
+								<sources>
+									<source>src/main/resource</source> 
+								</sources>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
 				<plugin>
 					<groupId>org.scala-tools</groupId>
 					<artifactId>maven-scala-plugin</artifactId>
