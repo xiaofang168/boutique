@@ -125,6 +125,12 @@
 	<build>
 		<resources>
 			<resource>
+				<directory>src/main/scala</directory>
+				<excludes>
+					<exclude>**/*.scala</exclude>
+				</excludes>
+			</resource>
+			<resource>
 				<directory>src/main/resources</directory>
 			</resource>
 			<resource>
@@ -132,6 +138,13 @@
 			</resource>
 		</resources>
 		<testResources>
+			<testResource>
+				<directory>src/test/scala</directory>
+				<excludes>
+					<exclude>**/*.scala</exclude>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</testResource>
 			<testResource>
 				<directory>src/test/resources</directory>
 			</testResource>
@@ -233,6 +246,51 @@
 						<target>1.5</target>
 						<optimize>true</optimize>
 						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+				<!-- to generate Eclipse artifacts for projects mixing Scala and Java -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<version>2.8</version>
+					<configuration>
+						<downloadSources>true</downloadSources>
+						<downloadJavadocs>true</downloadJavadocs>
+						<projectnatures>
+							<projectnature>org.scala-ide.sdt.core.scalanature</projectnature>
+							<projectnature>org.eclipse.jdt.core.javanature</projectnature>
+						</projectnatures>
+						<buildcommands>
+							<buildcommand>org.scala-ide.sdt.core.scalabuilder</buildcommand>
+						</buildcommands>
+						<classpathContainers>
+							<classpathContainer>org.scala-ide.sdt.launching.SCALA_CONTAINER</classpathContainer>
+							<classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+						</classpathContainers>
+						<excludes>
+							<!-- in Eclipse, use scala-library, scala-compiler from the SCALA_CONTAINER 
+								rather than POM <dependency> -->
+							<exclude>org.scala-lang:scala-library</exclude>
+							<exclude>org.scala-lang:scala-compiler</exclude>
+						</excludes>
+						<sourceIncludes>
+							<sourceInclude>**/*.scala</sourceInclude>
+							<sourceInclude>**/*.java</sourceInclude>
+						</sourceIncludes>
+					</configuration>
+				</plugin>
+
+				<!-- When run tests in the test phase, include .java and .scala source 
+					files -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.8.1</version>
+					<configuration>
+						<includes>
+							<include>**/*.java</include>
+							<include>**/*.scala</include>
+						</includes>
 					</configuration>
 				</plugin>
 			</plugins>
