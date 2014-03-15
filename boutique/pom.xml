@@ -123,13 +123,9 @@
 		</pluginRepository>
 	</pluginRepositories>
 	<build>
+		<sourceDirectory>src/main/scala</sourceDirectory>
+		<testSourceDirectory>src/test/scala</testSourceDirectory>
 		<resources>
-			<resource>
-				<directory>src/main/scala</directory>
-				<excludes>
-					<exclude>**/*.scala</exclude>
-				</excludes>
-			</resource>
 			<resource>
 				<directory>src/main/resources</directory>
 			</resource>
@@ -139,76 +135,11 @@
 		</resources>
 		<testResources>
 			<testResource>
-				<directory>src/test/scala</directory>
-				<excludes>
-					<exclude>**/*.scala</exclude>
-					<exclude>**/*.java</exclude>
-				</excludes>
-			</testResource>
-			<testResource>
 				<directory>src/test/resources</directory>
 			</testResource>
 		</testResources>
 		<pluginManagement>
 			<plugins>
-				<!-- Adds src/main/scala and src/test/scala as source folders, from http://groups.google.com/group/liftweb/browse_thread/thread/3dac7002f9e59546/3918bba2f7a92cd3?pli=1 -->
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>build-helper-maven-plugin</artifactId>
-					<version>1.8</version>
-					<!-- 添加主源码目录 -->
-					<executions>
-						<execution>
-							<id>add-source</id>
-							<phase>generate-sources</phase>
-							<goals>
-								<goal>add-source</goal>
-							</goals>
-							<configuration>
-								<sources>
-									<source>src/main/java</source>
-								</sources>
-							</configuration>
-						</execution>
-						<!-- 添加主资源文件目录 -->
-						<execution>
-							<!--自定义名称,不可重复 -->
-							<id>add-resource</id>
-							<!--指定绑定到生命周期 -->
-							<phase>generate-sources</phase>
-							<!--指定指定的目标,可添加多个 -->
-							<goals>
-								<goal>add-resource</goal>
-							</goals>
-							<configuration>
-								<resources>
-									<!--资源文件目录,可添加多个 -->
-									<resource>
-										<directory>${basedir}/src/main/one</directory>
-										<!--是否启用变量过滤 -->
-										<filtering>true</filtering>
-										<!--排除的文件,可添加多个 -->
-										<excludes>
-											<exclude>**/*.java</exclude>
-										</excludes>
-									</resource>
-								</resources>
-							</configuration>
-						</execution>
-						<execution>
-							<id>add-test-source</id>
-							<phase>generate-sources</phase>
-							<goals>
-								<goal>add-test-source</goal>
-							</goals>
-							<configuration>
-								<sources>
-									<source>${basedir}/src/main/five</source>
-								</sources>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
 				<plugin>
 					<groupId>org.scala-tools</groupId>
 					<artifactId>maven-scala-plugin</artifactId>
@@ -246,51 +177,6 @@
 						<target>1.5</target>
 						<optimize>true</optimize>
 						<encoding>UTF-8</encoding>
-					</configuration>
-				</plugin>
-				<!-- to generate Eclipse artifacts for projects mixing Scala and Java -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-eclipse-plugin</artifactId>
-					<version>2.8</version>
-					<configuration>
-						<downloadSources>true</downloadSources>
-						<downloadJavadocs>true</downloadJavadocs>
-						<projectnatures>
-							<projectnature>org.scala-ide.sdt.core.scalanature</projectnature>
-							<projectnature>org.eclipse.jdt.core.javanature</projectnature>
-						</projectnatures>
-						<buildcommands>
-							<buildcommand>org.scala-ide.sdt.core.scalabuilder</buildcommand>
-						</buildcommands>
-						<classpathContainers>
-							<classpathContainer>org.scala-ide.sdt.launching.SCALA_CONTAINER</classpathContainer>
-							<classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
-						</classpathContainers>
-						<excludes>
-							<!-- in Eclipse, use scala-library, scala-compiler from the SCALA_CONTAINER 
-								rather than POM <dependency> -->
-							<exclude>org.scala-lang:scala-library</exclude>
-							<exclude>org.scala-lang:scala-compiler</exclude>
-						</excludes>
-						<sourceIncludes>
-							<sourceInclude>**/*.scala</sourceInclude>
-							<sourceInclude>**/*.java</sourceInclude>
-						</sourceIncludes>
-					</configuration>
-				</plugin>
-
-				<!-- When run tests in the test phase, include .java and .scala source 
-					files -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.8.1</version>
-					<configuration>
-						<includes>
-							<include>**/*.java</include>
-							<include>**/*.scala</include>
-						</includes>
 					</configuration>
 				</plugin>
 			</plugins>
