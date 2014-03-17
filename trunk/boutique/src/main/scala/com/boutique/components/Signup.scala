@@ -18,6 +18,8 @@ import javax.validation.constraints.NotNull
 import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size
 import org.apache.tapestry5.EventConstants
+import org.apache.tapestry5.annotations.Persist
+import org.apache.tapestry5.PersistenceConstants
 
 /**
  * @ClassName: 注册组件
@@ -62,10 +64,15 @@ class Signup {
 
   @Inject
   private var authenticator: Authenticator = _
+  
+  @Property
+  @Persist(PersistenceConstants.FLASH)
+  private var signupError:Boolean= _
 
   @OnEvent(value = EventConstants.VALIDATE, component = "registerForm")
   def checkForm() {
     if (!confirmPassword.equals(password)) {
+      signupError = true
       form.recordError(messages.get("error.verifypassword"));
     }
   }

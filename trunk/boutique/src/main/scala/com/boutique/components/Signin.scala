@@ -54,10 +54,15 @@ class Signin {
   
   @Inject
   private var authenticator: Authenticator = _
+  
+  @Property
+  @Persist(PersistenceConstants.FLASH)
+  private var signinError:Boolean= _
 
   def onValidateFromLoginForm() {
     if (username != null) {
       if (!username.matches("^([A-Za-z]|[\\d])*$")) {
+        signinError=true
         form.recordError(usernameField, messages.get("error.username"));
       }
     }
