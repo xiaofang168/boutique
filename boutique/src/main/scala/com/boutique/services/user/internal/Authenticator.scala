@@ -10,6 +10,7 @@ import com.boutique.commons.AuthenticationException
 import com.boutique.dao.CrudDAO
 import org.apache.tapestry5.annotations.SessionState
 import org.apache.tapestry5.ioc.Messages
+import org.apache.tapestry5.annotations.SessionAttribute
 
 /**
  * @ClassName: Authenticator
@@ -26,7 +27,7 @@ class Authenticator {
   @Inject
   private var crudao: CrudDAO = _
 
-  @SessionState(create=false)
+  @SessionAttribute("userInfo")
   private var user: User = _
 
   def isLoggedIn(): Boolean = {
