@@ -41,7 +41,7 @@ class Layout {
   @Inject
   private var authenticator: Authenticator = _
   
-  @SessionAttribute()
+  @SessionAttribute("userInfo")
   private var user: User = _
 
   // 获取用户对象，判断用户是否登录
