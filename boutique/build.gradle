@@ -31,7 +31,7 @@ repositories {
 
 dependencies {
 	compile (
-		'org.scala-lang:scala-library:2.10.2',
+		'org.scala-lang:scala-library:2.10.3',
 		'org.apache.tapestry:tapestry-core:5.3.7',
 		'org.got5:tapestry5-jquery:3.3.4',
 		'org.apache.tapestry:tapestry-upload:5.3.7',
