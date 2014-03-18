@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory
 import org.slf4j.Logger
 import org.apache.tapestry5.ioc.annotations.Symbol
 import org.apache.tapestry5.SymbolConstants
-import org.apache.tapestry5.annotations.SessionState
 import org.apache.tapestry5.annotations.SessionAttribute
 import com.boutique.AppConstant
 
