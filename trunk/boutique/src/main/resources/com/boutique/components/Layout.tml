@@ -41,7 +41,7 @@
 				</form>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a id="login_href" data-toggle="modal" href="#login" data-target="#login">Login</a></li>
-					<li><a data-toggle="modal" href="#register" data-target="#register">Register</a></li>
+					<li><a id="register_href" data-toggle="modal" href="#register" data-target="#register">Register</a></li>
 				</ul>
 			</div>
 		</div>
@@ -85,8 +85,11 @@
 </body>
 <script type="text/javascript">
 $j(document).ready(function(){
-<t:if test="!user">
-		$j($j("#login_href").attr('data-target')).modal('toggle', $j("#login_href"))
+<t:if test="signupError">
+	$j($j("#register_href").attr('data-target')).modal('toggle', $j("#register_href"))
+</t:if>
+<t:if test="signinError">
+	$j($j("#login_href").attr('data-target')).modal('toggle', $j("#login_href"))
 </t:if>
 });
 </script>
