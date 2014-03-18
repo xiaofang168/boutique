@@ -4,13 +4,12 @@ package com.boutique.components
 import org.apache.tapestry5.annotations.Import
 import org.apache.tapestry5.annotations.Parameter
 import org.apache.tapestry5.annotations.Property
-import org.apache.tapestry5.ioc.annotations.Inject
+import org.apache.tapestry5.annotations.SessionAttribute
+import com.boutique.AppConstant
 import com.boutique.entities.User
-import com.boutique.services.user.internal.Authenticator
 import javax.persistence.Entity
 import javax.persistence.Table
 import org.apache.tapestry5.BindingConstants
-import org.apache.tapestry5.annotations.SessionState
 
 /**
  * @ClassName: Layout
@@ -23,19 +22,23 @@ import org.apache.tapestry5.annotations.SessionState
   "context:/static/js/bootstrap.min.js",
   "context:/static/js/CustomError.js"))
 class Layout {
-  
+
   @Property
   @Parameter(required = true, defaultPrefix = BindingConstants.LITERAL)
   private var pageTitle: String = _
 
-  @Inject
-  private var authenticator: Authenticator = _
-  
-  @SessionState
+  @Parameter
+  var errorAction: String = _
+
+  @SessionAttribute("userInfo")
   private var user: User = _
-  
-  def getUser(): User = {
-		 return user
+
+  def getSignupError(): Boolean = {
+    return AppConstant.SIGNUP_ACTION.equals(errorAction)
   }
-  
+
+  def getSigninError(): Boolean = {
+    return AppConstant.SIGNIN_ACTION.equals(errorAction)
+  }
+
 }
