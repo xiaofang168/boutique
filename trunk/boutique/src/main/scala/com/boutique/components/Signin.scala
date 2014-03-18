@@ -2,23 +2,22 @@
 package com.boutique.components
 
 import org.apache.tapestry5.annotations.Component
+import org.apache.tapestry5.annotations.InjectPage
 import org.apache.tapestry5.annotations.Log
 import org.apache.tapestry5.annotations.Persist
 import org.apache.tapestry5.annotations.Property
-import org.apache.tapestry5.corelib.components.Form
+import org.apache.tapestry5.annotations.SessionAttribute
+import org.apache.tapestry5.corelib.components.TextField
 import org.apache.tapestry5.ioc.Messages
 import org.apache.tapestry5.ioc.annotations.Inject
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+import com.boutique.AppConstant
+import com.boutique.entities.User
 import com.boutique.pages.Index
 import com.boutique.services.user.UserService
-import org.apache.tapestry5.PersistenceConstants
-import org.apache.tapestry5.corelib.components.TextField
-import org.apache.tapestry5.services.Request
-import com.boutique.AppConstant
-import org.apache.tapestry5.annotations.SessionState
-import com.boutique.entities.User
-import org.slf4j.LoggerFactory
-import org.slf4j.Logger
 import com.boutique.services.user.internal.Authenticator
+import org.apache.tapestry5.PersistenceConstants
 
 /**
  * @ClassName: Signin
@@ -33,8 +32,8 @@ class Signin {
   @Inject
   private var userService: UserService = _
 
-  @Inject
-  private var request: Request = _
+  @SessionAttribute("userInfo")
+  private var user: User = _
   
   @Component(id = "loginForm")
   private var form: CustomForm = _
@@ -55,14 +54,12 @@ class Signin {
   @Inject
   private var authenticator: Authenticator = _
   
-  @Property
-  @Persist(PersistenceConstants.FLASH)
-  private var signinError:Boolean= _
+  @InjectPage 
+  private var index:Index = _
 
   def onValidateFromLoginForm() {
     if (username != null) {
       if (!username.matches("^([A-Za-z]|[\\d])*$")) {
-        signinError=true
         form.recordError(usernameField, messages.get("error.username"));
       }
     }
@@ -70,8 +67,21 @@ class Signin {
 
   @Log
   def onSubmitFromLoginForm(): Object = {
-    authenticator.login(username, password)
-    return classOf[Index]
+    user = authenticator.login(username, password)
+    if(user==null){
+      index.errorAction = AppConstant.SIGNIN_ACTION
+      form.recordError(messages.get("signinError"));
+    }
+    return index
+  }
+  
+  def onSuccess() = {
+	  logger.debug("Signin success!")
+  }
+  
+  def onFailure() ={
+	  logger.debug("Signin fail!")
+	  index.errorAction = AppConstant.SIGNIN_ACTION
   }
 
 }
