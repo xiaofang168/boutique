@@ -20,6 +20,9 @@ import javax.validation.constraints.Size
 import org.apache.tapestry5.EventConstants
 import org.apache.tapestry5.annotations.Persist
 import org.apache.tapestry5.PersistenceConstants
+import org.apache.tapestry5.annotations.InjectPage
+import com.boutique.AppConstant
+import org.apache.tapestry5.annotations.SessionAttribute
 
 /**
  * @ClassName: 注册组件
@@ -65,14 +68,15 @@ class Signup {
   @Inject
   private var authenticator: Authenticator = _
   
-  @Property
-  @Persist(PersistenceConstants.FLASH)
-  private var signupError:Boolean= _
+  @SessionAttribute("userInfo")
+  private var user: User = _
+  
+  @InjectPage 
+  private var index:Index = _
 
   @OnEvent(value = EventConstants.VALIDATE, component = "registerForm")
   def checkForm() {
     if (!confirmPassword.equals(password)) {
-      signupError = true
       form.recordError(messages.get("error.verifypassword"));
     }
   }
@@ -83,15 +87,19 @@ class Signup {
     logger.debug("userVerif"+userVerif)
     if (!userVerif.isEmpty) {
       form.recordError(messages.get("error.userexists"))
-      return null;
+      return index
     }
-    var user = new User
+    user = new User
     user.username = username
     user.password = password
     user.email = email
     userService.save(user)
-    authenticator.login(username, password)
-    return classOf[Index]
+    return index
+  }
+  
+  def onFailure() = {
+    index.errorAction = AppConstant.SIGNUP_ACTION
+    logger.debug("Signup fail!")
   }
 
 }
