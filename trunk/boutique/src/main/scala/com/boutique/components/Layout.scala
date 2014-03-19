@@ -33,12 +33,8 @@ class Layout {
   @SessionAttribute("userInfo")
   private var user: User = _
 
-  def getSignupError(): Boolean = {
-    return AppConstant.SIGNUP_ACTION.equals(errorAction)
-  }
+  def getSignupError(): Boolean = AppConstant.SIGNUP_ACTION.equals(errorAction)
 
-  def getSigninError(): Boolean = {
-    return AppConstant.SIGNIN_ACTION.equals(errorAction)
-  }
+  def getSigninError(): Boolean = AppConstant.SIGNIN_ACTION.equals(errorAction)
 
 }
