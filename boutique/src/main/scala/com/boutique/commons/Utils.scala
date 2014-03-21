@@ -21,11 +21,8 @@ import java.util.List
  */
 object Utils {
 
-  def javaListConvertorScalaList(list: List[_]): scala.collection.immutable.List[_] = {
-    return scala.collection.JavaConversions.asScalaBuffer(list).toList
-  }
+  def javaListConvertorScalaList(list: List[_]): scala.collection.immutable.List[_] = scala.collection.JavaConversions.asScalaBuffer(list).toList
 
-  def ScalaListConvertorjavaList(list: scala.collection.immutable.List[_]): List[_] = {
-    return scala.collection.JavaConversions.asJavaList(list)
-  }
+  def ScalaListConvertorjavaList(list: scala.collection.immutable.List[_]): List[_] = scala.collection.JavaConversions.asJavaList(list)
+
 }
