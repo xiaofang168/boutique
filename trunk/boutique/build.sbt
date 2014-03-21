@@ -34,14 +34,14 @@ libraryDependencies ++= Seq(
 EclipseKeys.createSrc := EclipseCreateSrc.Default + EclipseCreateSrc.Resource
 
 //添加额外源代码目录
-unmanagedSourceDirectories in Compile += baseDirectory.value / "src/main/conf/development"
+//unmanagedSourceDirectories in Compile += baseDirectory.value / "src/main/conf/development"
 
 //添加额外的资源目录
 unmanagedResourceDirectories in Compile += baseDirectory.value / "src/main/conf/development"
 
 javacOptions ++= Seq("-source", "1.6", "-encoding", "UTF-8", "-target", "1.6")
 
-scalacOptions ++= Seq( "-encoding", "UTF-8", "-target:jvm-1.6" )
+scalacOptions ++= Seq("-encoding", "UTF-8", "-target:jvm-1.6")
 
 compileOrder := CompileOrder.JavaThenScala
 
