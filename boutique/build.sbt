@@ -33,8 +33,11 @@ libraryDependencies ++= Seq(
 
 EclipseKeys.createSrc := EclipseCreateSrc.Default + EclipseCreateSrc.Resource
 
-//添加额外资源目录
+//添加额外源代码目录
 unmanagedSourceDirectories in Compile += baseDirectory.value / "src/main/conf/development"
+
+//添加额外的资源目录
+unmanagedResourceDirectories in Compile += baseDirectory.value / "src/main/conf/development"
 
 javacOptions ++= Seq("-source", "1.6", "-encoding", "UTF-8", "-target", "1.6")
 
