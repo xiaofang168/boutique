@@ -12,10 +12,9 @@ package com.boutique.dao.impl
 import org.apache.tapestry5.ioc.annotations.Inject
 import org.hibernate.Query
 import org.hibernate.Session
-
 import com.boutique.AppConstant
-import com.boutique.commons.Utils
 import com.boutique.dao.CrudDAO
+import java.util.List
 /**
  * @ClassName: CrudDAO
  * @Description: 增删改查dao服务实现类
@@ -37,14 +36,14 @@ class CrudDAOImpl extends CrudDAO {
     session.get(clType, id).asInstanceOf
   }
 
-  def find(hql: String): List[_] = {
+  def find(hql: String): java.util.List[_] = {
     return find(hql, null)
   }
 
-  def find(hql: String, params: Array[Object]): List[_] = {
+  def find(hql: String, params: Array[Object]): java.util.List[_] = {
     var query = setHqlQueryParameter(hql, params)
     query.setCacheable(AppConstant.EHCACH_EABLE)
-    Utils.javaListConvertorScalaList(query.list())
+    return query.list()
   }
 
   def findUnique[T](hql: String, params: Array[Object]): T = {
