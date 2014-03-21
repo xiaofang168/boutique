@@ -9,10 +9,16 @@
  */
 package com.boutique.pages.admin.product.category
 
-import com.boutique.entities.GoodsCate
 import org.apache.tapestry5.annotations.Property
-import com.boutique.dao.CrudDAO
 import org.apache.tapestry5.ioc.annotations.Inject
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+
+import com.boutique.dao.CrudDAO
+import com.boutique.entities.GoodsCate
+
+import javax.persistence.Entity
+import javax.persistence.Table
 
 /**
  * @ClassName: List
@@ -23,8 +29,10 @@ import org.apache.tapestry5.ioc.annotations.Inject
  */
 class List {
   
+  private var logger:Logger = LoggerFactory.getLogger(classOf[List])
+  
   @Property
-  private var goodsCateList:scala.collection.immutable.List[GoodsCate] = _
+  private var goodsCateList:java.util.List[GoodsCate] = _
   
   @Property
   private var goodsCate:GoodsCate = _
@@ -33,7 +41,8 @@ class List {
   private var crudDao:CrudDAO = _
   
   def setupRender()={
-    goodsCateList = crudDao.find("from GoodsCate o").asInstanceOf[scala.collection.immutable.List[GoodsCate]]
+    goodsCateList = crudDao.find("from GoodsCate o").asInstanceOf[java.util.List[GoodsCate]]
+    logger.debug("goodsCateList size:"+goodsCateList.size)
   }
 
 }
