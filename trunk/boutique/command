@@ -1,1 +1,1 @@
-~ ;compile;copy-resources
+~ ;compile;test:compile;copy-resources
