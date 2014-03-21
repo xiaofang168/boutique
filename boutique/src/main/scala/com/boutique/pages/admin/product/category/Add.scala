@@ -63,10 +63,6 @@ class Add {
   
   @Component(id = "categoryForm")
   private var form: CustomForm = _
-  
-  @Property
-  private var gc:GoodsCate = new GoodsCate()
-  
 
   @InjectComponent("nameKey")
   private var nameKeyField: TextField = _
@@ -94,15 +90,17 @@ class Add {
   }
   
   def onValidateFromCategoryForm() {
-    if (StringUtils.isBlank(gc.nameKey)) {
+    if (StringUtils.isBlank(nameKey)) {
         form.recordError(nameKeyField, messages.get("nameKey-required-message"));
     }
   }
   
   @OnEvent(value = EventConstants.SUCCESS, component = "categoryForm")
   def onSubmitFromCategoryForm(): Object = {
+    var gc:GoodsCate = new GoodsCate()
+    gc.nameKey = nameKey
     dao.save(gc)
-    return classOf[Add]
+    return classOf[List]
   }
   
   
