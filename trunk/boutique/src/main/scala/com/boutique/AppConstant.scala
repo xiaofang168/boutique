@@ -20,6 +20,8 @@ object AppConstant {
 
   final val EHCACH_EABLE: Boolean = true
   
+  final val EHCACH_DISABLE: Boolean = true
+  
   final val USER_INFO: String = "userInfo"
     
   final val SIGNUP_ACTION: String = "signup"
