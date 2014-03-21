@@ -65,7 +65,9 @@ object Container {
 	    //builder.add(classOf[])
 	    builder.add(classOf[HibernateCoreModule])
 	    builder.add(classOf[AppModuleTest])
-	    builder.add(moduleClasses: _*)
+	    if(moduleClasses!=null){
+	    	builder.add(moduleClasses: _*)
+	    }
 	    registry = builder.build()
 	    registry.performRegistryStartup()
 	}
