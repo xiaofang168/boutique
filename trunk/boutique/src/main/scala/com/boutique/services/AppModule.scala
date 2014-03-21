@@ -40,7 +40,7 @@ object AppModule {
     configuration.add("com.boutique.entities");
   }
 
-  @Match(Array[String]("*Service"))
+  @Match(Array[String]("*Service","*DAO"))
   def decorateTransactions[T](serviceInterface: Class[T], delegate: T, serviceId: String, decorator: HibernateTransactionDecorator): T = {
     return decorator.build(serviceInterface, delegate, serviceId)
   }
