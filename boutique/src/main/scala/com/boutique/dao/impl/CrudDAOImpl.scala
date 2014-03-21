@@ -29,10 +29,8 @@ class CrudDAOImpl extends CrudDAO {
   var session: Session = _
 
   def save[T](t: T): T = {
-    session.persist(t)
-    session.flush();
-    session.refresh(t);
-    return t;
+    session.save(t)
+    return t
   }
 
   def get[T, PK <: java.io.Serializable](clType: Class[T], id: PK): T = {
