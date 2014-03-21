@@ -33,12 +33,12 @@ import org.apache.tapestry5.annotations.SessionAttribute
  */
 class Signup {
 
-  private var logger:Logger = LoggerFactory.getLogger(classOf[Signup])
-   
+  private var logger: Logger = LoggerFactory.getLogger(classOf[Signup])
+
   @Property
-  @NotNull(message="{notnull}")
-  @Size(min=3,max=10,message="{usernameSize}")
-  @Pattern(regexp="^([A-Za-z]|[\\d])*$",message="{usernameRegexp}")
+  @NotNull(message = "{notnull}")
+  @Size(min = 3, max = 10, message = "{usernameSize}")
+  @Pattern(regexp = "^([A-Za-z]|[\\d])*$", message = "{usernameRegexp}")
   private var username: String = _
 
   @Property
@@ -67,12 +67,12 @@ class Signup {
 
   @Inject
   private var authenticator: Authenticator = _
-  
+
   @SessionAttribute("userInfo")
   private var user: User = _
-  
-  @InjectPage 
-  private var index:Index = _
+
+  @InjectPage
+  private var index: Index = _
 
   @OnEvent(value = EventConstants.VALIDATE, component = "registerForm")
   def checkForm() {
@@ -84,8 +84,9 @@ class Signup {
   @OnEvent(value = EventConstants.SUCCESS, component = "RegisterForm")
   def proceedSignup(): Object = {
     var userVerif = crudDao.find("from User u where u.username=? and u.email=?", Array(username, email))
-    logger.debug("userVerif"+userVerif)
+    logger.debug("userVerif" + userVerif)
     if (!userVerif.isEmpty) {
+      index.errorAction = AppConstant.SIGNUP_ACTION
       form.recordError(messages.get("error.userexists"))
       return index
     }
@@ -96,10 +97,15 @@ class Signup {
     userService.save(user)
     return index
   }
-  
+
   def onFailure() = {
     index.errorAction = AppConstant.SIGNUP_ACTION
     logger.debug("Signup fail!")
+  }
+
+  def onSuccess() = {
+    index.errorAction = null
+    logger.debug("Signup success!")
   }
 
 }

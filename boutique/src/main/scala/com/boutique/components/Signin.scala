@@ -27,14 +27,14 @@ import org.apache.tapestry5.PersistenceConstants
  * @version: V1.0
  */
 class Signin {
-  private var logger:Logger = LoggerFactory.getLogger(classOf[Signin])
-  
+  private var logger: Logger = LoggerFactory.getLogger(classOf[Signin])
+
   @Inject
   private var userService: UserService = _
 
   @SessionAttribute("userInfo")
   private var user: User = _
-  
+
   @Component(id = "loginForm")
   private var form: CustomForm = _
 
@@ -50,12 +50,12 @@ class Signin {
 
   @Inject
   private var messages: Messages = _
-  
+
   @Inject
   private var authenticator: Authenticator = _
-  
-  @InjectPage 
-  private var index:Index = _
+
+  @InjectPage
+  private var index: Index = _
 
   def onValidateFromLoginForm() {
     if (username != null) {
@@ -68,20 +68,21 @@ class Signin {
   @Log
   def onSubmitFromLoginForm(): Object = {
     user = authenticator.login(username, password)
-    if(user==null){
+    if (user == null) {
       index.errorAction = AppConstant.SIGNIN_ACTION
       form.recordError(messages.get("signinError"));
     }
     return index
   }
-  
+
   def onSuccess() = {
-	  logger.debug("Signin success!")
+    index.errorAction = null
+    logger.debug("Signin success!")
   }
-  
-  def onFailure() ={
-	  logger.debug("Signin fail!")
-	  index.errorAction = AppConstant.SIGNIN_ACTION
+
+  def onFailure() = {
+    index.errorAction = AppConstant.SIGNIN_ACTION
+    logger.debug("Signin fail!")
   }
 
 }
