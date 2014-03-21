@@ -27,7 +27,19 @@ libraryDependencies ++= Seq(
     "commons-collections" % "commons-collections" % "3.2",
     "javax.validation" % "validation-api" % "1.1.0.Final",
     "org.directwebremoting" % "dwr" % "3.0.M1",
-    "commons-logging" % "commons-logging" % "1.1.3"
+    "commons-logging" % "commons-logging" % "1.1.3",
+    "junit" % "junit" % "4.4" % "test"
 )
 
 EclipseKeys.createSrc := EclipseCreateSrc.Default + EclipseCreateSrc.Resource
+
+//添加额外资源目录
+unmanagedSourceDirectories in Compile += baseDirectory.value / "src/main/conf/development"
+
+javacOptions ++= Seq("-source", "1.6", "-encoding", "UTF-8", "-target", "1.6")
+
+scalacOptions ++= Seq( "-encoding", "UTF-8", "-target:jvm-1.6" )
+
+compileOrder := CompileOrder.JavaThenScala
+
+EclipseKeys.executionEnvironment := Some(EclipseExecutionEnvironment.JavaSE16)
