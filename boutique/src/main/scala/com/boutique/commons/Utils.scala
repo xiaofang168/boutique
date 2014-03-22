@@ -10,8 +10,6 @@
  */
 package com.boutique.commons
 
-import java.util.List
-
 /**
  * @ClassName: Utils
  * @Description: 系统工具类
@@ -20,9 +18,5 @@ import java.util.List
  * @version: V1.0
  */
 object Utils {
-
-  def javaListConvertorScalaList(list: List[_]): scala.collection.immutable.List[_] = scala.collection.JavaConversions.asScalaBuffer(list).toList
-
-  def ScalaListConvertorjavaList(list: scala.collection.immutable.List[_]): List[_] = scala.collection.JavaConversions.asJavaList(list)
 
 }
