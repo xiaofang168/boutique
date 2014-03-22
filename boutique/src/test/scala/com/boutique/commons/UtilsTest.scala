@@ -10,9 +10,16 @@
  */
 package com.boutique.commons
 
-import org.junit.Test
-import org.junit.Assert
 import java.util.ArrayList
+
+import scala.collection.JavaConverters.asScalaBufferConverter
+import scala.collection.JavaConverters.bufferAsJavaListConverter
+import scala.collection.mutable.Buffer
+import scala.collection.mutable.ListBuffer
+import scala.collection.JavaConverters._
+
+import org.junit.Assert
+import org.junit.Test
 
 /**
  * @ClassName: UtilsTest
@@ -25,8 +32,8 @@ class UtilsTest {
 
   @Test
   def testScalaListConvertorjavaList() {
-	  var scalaList:List[_] = List("1","2")
-	  var javaList:java.util.List[_]=Utils.ScalaListConvertorjavaList(scalaList)
+	  var scalaList:ListBuffer[_] = ListBuffer("1","2")
+	  var javaList:java.util.List[_]= scalaList.asJava
 	  Assert.assertEquals(2, javaList.size())
   }
 
@@ -35,7 +42,7 @@ class UtilsTest {
 	  var javaList:java.util.List[String] = new ArrayList[String]()
 	  javaList.add("1")
 	  javaList.add("2")
-	  var scalaList:List[_]=Utils.javaListConvertorScalaList(javaList)
+	  var scalaList:Buffer[_]= javaList.asScala
 	  Assert.assertEquals(2, scalaList.length)
   }
 }
