@@ -10,9 +10,7 @@
 package com.boutique.components
 
 import java.util.Locale
-
 import scala.collection.immutable.List
-
 import org.apache.tapestry5.SymbolConstants
 import org.apache.tapestry5.annotations.Property
 import org.apache.tapestry5.annotations.Service
@@ -23,8 +21,8 @@ import org.apache.tapestry5.ioc.services.SymbolProvider
 import org.apache.tapestry5.services.PersistentLocale
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-
 import com.boutique.model.LocaleSelectModel
+import scala.collection.mutable.ListBuffer
 
 class LocaleBar {
 
@@ -73,9 +71,9 @@ class LocaleBar {
   }
 
   def onPrepare() = {
-    var localeList = List[Locale]()
+    var localeList = ListBuffer[Locale]()
     getLocales().foreach(locale => {
-      localeList ::= new Locale(locale)
+      localeList += new Locale(locale)
     })
     LocalesModel = new LocaleSelectModel(localeList)
   }
