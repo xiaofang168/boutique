@@ -1,0 +1,125 @@
+<html t:type="layout" t:title="boutique detail"
+      t:pageTitle="Detail"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:p="tapestry:parameter"> 
+<head>
+	<link rel="stylesheet" type="text/css" href="${context:static/css/product.css}"/>
+	<script type="text/javascript">
+	function init(){
+		$j('.img-thumbnail a').hover(function(e){
+			var big_src = $j(this).attr('big');
+			$j('#big_img').attr('src', big_src);
+		});
+	}
+</script>
+</head>
+<body onload="init()">
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="row product-detail">
+				<div class="col-xs-12">
+					<h2>Product name</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class= "col-xs-4">
+					<img id="big_img" alt="" src="http://wbpreview.com/previews/WB0BMF1K5/img/product2.jpg" class="img-responsive" />
+				</div>
+				<div class="col-xs-1">
+					<div class="row">
+						<div class="img-thumbnail" onfocus="alert('')">
+							<a href="" big="http://wbpreview.com/previews/WB0BMF1K5/img/product2.jpg">
+								<img src="http://wbpreview.com/previews/WB0BMF1K5/img/product2.jpg" style="width:100%;" onclick="alert(this.src)"/>
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="img-thumbnail">
+							<a href="" big="https://apps.bigbase.nl/templates/data/web/5001/img/product_01.jpg">
+								<img src="https://apps.bigbase.nl/templates/data/web/5001/img/product_01.jpg" style="width:100%;"/>
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="img-thumbnail">
+							<a href="" big="https://apps.bigbase.nl/templates/data/web/5001/img/product_02.jpg">
+								<img src="https://apps.bigbase.nl/templates/data/web/5001/img/product_02.jpg" style="width:100%;"/>
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="img-thumbnail">
+							<a href="" big="https://apps.bigbase.nl/templates/data/web/5001/img/product_02b.jpg">
+								<img src="https://apps.bigbase.nl/templates/data/web/5001/img/product_02b.jpg" style="width:100%;"/>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class= "col-xs-7">
+					<div class="col-xs-7">
+						<div class="row">
+							<div class="col-xs-7">
+								<strong>Brand:</strong>
+								<span>Squeezer</span>
+								<br/>
+								<strong>Model:</strong>
+								<span>Squeezer</span>
+								<br/>
+								<strong>Size:</strong>
+								<span>7</span>
+								<br/>
+								<strong>Color</strong>
+								<span>Yellow</span>
+								<br/>
+								<strong>Quality:</strong>
+								<span>new</span>
+								<br/>
+							</div>
+							<div class="col-xs-5">
+								<span class="label label-warning price">$ 0,50</span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-7">
+								<br/>
+								<h3>Description</h3>
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus, nisl nec volutpat pretium, tellus lectus 
+									condimentum leo, non facilisis tortor sapien a lectus.
+								</p>
+								<hr/>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-3">
+								<a href="products.html" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
+							</div>
+							<div class="col-xs-7">
+								<form class="form-horizontal">
+									<div class="form-group">
+										<label class="col-xs-3 control-label">Count</label>
+										<div class="col-xs-4">
+											<select class="form-control">
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+											</select>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="col-xs-2">
+								<a href="order.html" class="btn btn-primary"><i class="glyphicon glyphicon-shopping-cart"></i> Order now</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
